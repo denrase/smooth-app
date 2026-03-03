@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 /// Type of "search products" action.
 enum SearchProductsType {
@@ -52,18 +53,31 @@ class SearchProductsManager {
     required final UriProductHelper uriHelper,
     required final SearchProductsType type,
   }) async {
-    await type.waitIfNeeded();
+    return Sentry.startSpan('product.search', (span) async {
+      span.setAttribute(
+        'query_type',
+        SentryAttribute.string(type.name),
+      );
 
-    // It's better to do the HTTP actions outside of "compute", because
-    // there are init phases for HTTP (like user agent and SSL certificates)
-    // that would need to be somehow replicated for a new "compute thread".
-    // Besides, putting HTTP in "compute" wouldn't improve the performances.
-    final Response response = await configuration.getResponse(user, uriHelper);
-    TooManyRequestsException.check(response);
+      await type.waitIfNeeded();
 
-    final SearchResult result = await compute(_decodeProducts, response.body);
-    _removeImages(result, configuration);
-    return result;
+      // It's better to do the HTTP actions outside of "compute", because
+      // there are init phases for HTTP (like user agent and SSL certificates)
+      // that would need to be somehow replicated for a new "compute thread".
+      // Besides, putting HTTP in "compute" wouldn't improve the performances.
+      final Response response =
+          await configuration.getResponse(user, uriHelper);
+      TooManyRequestsException.check(response);
+
+      final SearchResult result = await Sentry.startSpan(
+        'product.search.decode',
+        (decodeSpan) async {
+          return compute(_decodeProducts, response.body);
+        },
+      );
+      _removeImages(result, configuration);
+      return result;
+    });
   }
 
   static Future<SearchResult> _decodeProducts(

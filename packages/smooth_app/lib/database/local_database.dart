@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:sentry_hive/sentry_hive.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:smooth_app/background/background_task_manager.dart';
@@ -86,7 +86,7 @@ class LocalDatabase extends ChangeNotifier {
     final LocalDatabase localDatabase = LocalDatabase._(database);
 
     // only hive from there
-    await Hive.initFlutter();
+    SentryHive.init((await getApplicationDocumentsDirectory()).path);
     final List<AbstractDao> daos = <AbstractDao>[
       DaoHiveProduct(localDatabase),
       DaoProductList(localDatabase),

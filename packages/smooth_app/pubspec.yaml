@@ -108,6 +108,7 @@ dependencies:
   #   path: ../../../openfoodfacts-dart
 
 dev_dependencies:
+  sentry_dart_plugin: ^3.2.1
   integration_test:
     sdk: flutter
   flutter_driver:
@@ -194,3 +195,8 @@ flutter:
     - family: FoodIcons
       fonts:
         - asset: assets/fonts/FoodIcons.ttf
+sentry:
+  upload_debug_symbols: true
+  upload_source_maps: true
+  project: smooth-app-span-first
+  org: denrase

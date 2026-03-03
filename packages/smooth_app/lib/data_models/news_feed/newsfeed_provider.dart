@@ -5,6 +5,7 @@ import 'dart:isolate';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:smooth_app/helpers/network_config.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:smooth_app/data_models/news_feed/newsfeed_model.dart';
@@ -126,7 +127,7 @@ class AppNewsProvider extends ChangeNotifier {
         uri = Uri.parse(_newsUrl);
       }
 
-      final http.Response response = await http.get(uri);
+      final http.Response response = await sentryHttpClient.get(uri);
 
       if (response.statusCode == 404) {
         Logs.e("Remote file $uri doesn't exist!");

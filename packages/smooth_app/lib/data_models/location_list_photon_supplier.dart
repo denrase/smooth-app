@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:openfoodfacts/openfoodfacts.dart';
+import 'package:smooth_app/helpers/network_config.dart';
 import 'package:smooth_app/data_models/location_list_supplier.dart';
 import 'package:smooth_app/data_models/location_osm_type_extension.dart';
 import 'package:smooth_app/pages/locations/osm_location.dart';
@@ -44,7 +45,7 @@ class LocationListPhotonSupplier extends LocationListSupplier {
 
     try {
       locations.clear();
-      final http.Response response = await http.get(
+      final http.Response response = await sentryHttpClient.get(
         Uri(
           scheme: 'https',
           host: 'photon.komoot.io',

@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:http/http.dart' as http;
 import 'package:smooth_app/cards/category_cards/asset_cache_helper.dart';
+import 'package:smooth_app/helpers/network_config.dart';
 import 'package:smooth_app/cards/category_cards/svg_async_asset.dart';
 import 'package:smooth_app/cards/category_cards/svg_cache.dart';
 import 'package:smooth_app/services/smooth_services.dart';
@@ -68,7 +69,7 @@ class _SvgSafeNetworkState extends State<SvgSafeNetwork> {
     }
 
     // try with the url
-    final http.Response response1 = await http.get(Uri.parse(_url));
+    final http.Response response1 = await sentryHttpClient.get(Uri.parse(_url));
     if (response1.statusCode == statusOk) {
       _networkCache[_url] = cached = response1.body;
       return cached;
@@ -76,7 +77,7 @@ class _SvgSafeNetworkState extends State<SvgSafeNetwork> {
     if (response1.statusCode == statusNotFound) {
       if (alternateUrl != null) {
         // try with the alternate url
-        final http.Response response2 = await http.get(Uri.parse(alternateUrl));
+        final http.Response response2 = await sentryHttpClient.get(Uri.parse(alternateUrl));
         if (response2.statusCode == statusOk) {
           _networkCache[alternateUrl] = cached = response2.body;
           return cached;

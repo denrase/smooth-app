@@ -2,14 +2,20 @@ import 'dart:io';
 
 import 'package:device_info_plus/device_info_plus.dart' deferred as dip;
 import 'package:flutter/services.dart';
+import 'package:http/http.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:smooth_app/helpers/app_helper.dart';
 import 'package:uuid/uuid.dart';
+
+/// Shared HTTP client instrumented with Sentry for automatic span creation.
+late final Client sentryHttpClient;
 
 /// Initializes both the user agent && the SSL certificate
 Future<void> setupAppNetworkConfig() async {
   await _initUserAgent();
+  sentryHttpClient = SentryHttpClient(client: Client());
   return _importSSLCertificate();
 }
 

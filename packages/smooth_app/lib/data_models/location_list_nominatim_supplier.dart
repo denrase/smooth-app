@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:openfoodfacts/openfoodfacts.dart';
+import 'package:smooth_app/helpers/network_config.dart';
 import 'package:smooth_app/data_models/location_list_supplier.dart';
 import 'package:smooth_app/pages/locations/osm_location.dart';
 import 'package:smooth_app/query/product_query.dart';
@@ -19,7 +20,7 @@ class LocationListNominatimSupplier extends LocationListSupplier {
   Future<String?> asyncLoad() async {
     try {
       locations.clear();
-      final http.Response response = await http.get(
+      final http.Response response = await sentryHttpClient.get(
         Uri(
           scheme: 'https',
           host: 'nominatim.openstreetmap.org',

@@ -6,6 +6,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
+import 'package:smooth_app/helpers/network_config.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
@@ -386,7 +387,7 @@ Future<File?> downloadImageUrl(
 /// Downloads an image from the server and stores it locally in temp folder.
 Future<File?> _downloadImageFile(DaoInt daoInt, String url) async {
   final Uri uri = Uri.parse(url);
-  final http.Response response = await http.get(uri);
+  final http.Response response = await sentryHttpClient.get(uri);
   final int code = response.statusCode;
   if (code != 200) {
     throw NetworkImageLoadException(statusCode: code, uri: uri);

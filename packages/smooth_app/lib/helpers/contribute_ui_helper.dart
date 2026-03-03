@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
+import 'package:smooth_app/helpers/network_config.dart';
 import 'package:smooth_app/data_models/github_contributors_model.dart';
 import 'package:smooth_app/data_models/preferences/user_preferences.dart';
 import 'package:smooth_app/generic_lib/bottom_sheets/smooth_bottom_sheet.dart';
@@ -111,7 +112,7 @@ class ContributeUIHelper {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               FutureBuilder<http.Response>(
-                future: http.get(
+                future: sentryHttpClient.get(
                   Uri.https(
                     'api.github.com',
                     '/repos/openfoodfacts/smooth-app/contributors',

@@ -1,7 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hive/hive.dart';
+import 'package:sentry_hive/sentry_hive.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:smooth_app/data_models/product_list.dart';
 import 'package:smooth_app/database/abstract_dao.dart';
@@ -69,12 +70,12 @@ class DaoProductList extends AbstractDao {
   static const String _keySeparator = '::';
 
   @override
-  Future<void> init() async => Hive.openLazyBox<_BarcodeList>(_hiveBoxName);
+  Future<void> init() async => SentryHive.openLazyBox<_BarcodeList>(_hiveBoxName);
 
   @override
-  void registerAdapter() => Hive.registerAdapter(_BarcodeListAdapter());
+  void registerAdapter() => SentryHive.registerAdapter(_BarcodeListAdapter());
 
-  LazyBox<_BarcodeList> _getBox() => Hive.lazyBox<_BarcodeList>(_hiveBoxName);
+  LazyBox<_BarcodeList> _getBox() => SentryHive.lazyBox<_BarcodeList>(_hiveBoxName);
 
   Future<_BarcodeList?> _get(final ProductList productList) async {
     final _BarcodeList? result = await _getBox().get(getKey(productList));

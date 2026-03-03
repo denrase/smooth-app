@@ -1,4 +1,5 @@
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hive/hive.dart';
+import 'package:sentry_hive/sentry_hive.dart';
 import 'package:smooth_app/database/abstract_dao.dart';
 
 class DaoStringListMap extends AbstractDao {
@@ -9,13 +10,13 @@ class DaoStringListMap extends AbstractDao {
 
   @override
   Future<void> init() async =>
-      Hive.openBox<Map<dynamic, dynamic>>(_hiveBoxName);
+      SentryHive.openBox<Map<dynamic, dynamic>>(_hiveBoxName);
 
   @override
   void registerAdapter() {}
 
   Box<Map<dynamic, dynamic>> _getBox() {
-    return Hive.box<Map<dynamic, dynamic>>(_hiveBoxName);
+    return SentryHive.box<Map<dynamic, dynamic>>(_hiveBoxName);
   }
 
   Future<Map<String, List<String>>> getAll() async {

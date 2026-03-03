@@ -1,4 +1,5 @@
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hive/hive.dart';
+import 'package:sentry_hive/sentry_hive.dart';
 import 'package:smooth_app/database/abstract_dao.dart';
 
 /// Where we store ints.
@@ -8,12 +9,12 @@ class DaoInt extends AbstractDao {
   static const String _hiveBoxName = 'int';
 
   @override
-  Future<void> init() async => Hive.openBox<int>(_hiveBoxName);
+  Future<void> init() async => SentryHive.openBox<int>(_hiveBoxName);
 
   @override
   void registerAdapter() {}
 
-  Box<int> _getBox() => Hive.box<int>(_hiveBoxName);
+  Box<int> _getBox() => SentryHive.box<int>(_hiveBoxName);
 
   int? get(final String key) => _getBox().get(key);
 

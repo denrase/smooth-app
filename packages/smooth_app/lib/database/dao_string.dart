@@ -1,4 +1,5 @@
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hive/hive.dart';
+import 'package:sentry_hive/sentry_hive.dart';
 import 'package:smooth_app/database/abstract_dao.dart';
 
 /// Where we store strings.
@@ -13,12 +14,12 @@ class DaoString extends AbstractDao {
   static const String _hiveBoxName = 'string';
 
   @override
-  Future<void> init() async => Hive.openLazyBox<String>(_hiveBoxName);
+  Future<void> init() async => SentryHive.openLazyBox<String>(_hiveBoxName);
 
   @override
   void registerAdapter() {}
 
-  LazyBox<String> _getBox() => Hive.lazyBox<String>(_hiveBoxName);
+  LazyBox<String> _getBox() => SentryHive.lazyBox<String>(_hiveBoxName);
 
   Future<String?> get(final String key) async => _getBox().get(key);
 

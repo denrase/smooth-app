@@ -1,4 +1,5 @@
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hive/hive.dart';
+import 'package:sentry_hive/sentry_hive.dart';
 import 'package:smooth_app/database/abstract_dao.dart';
 
 /// Where we store string lists with unique items.
@@ -40,12 +41,12 @@ class DaoStringList extends AbstractDao {
   };
 
   @override
-  Future<void> init() async => Hive.openBox<List<String>>(_hiveBoxName);
+  Future<void> init() async => SentryHive.openBox<List<String>>(_hiveBoxName);
 
   @override
   void registerAdapter() {}
 
-  Box<List<String>> _getBox() => Hive.box<List<String>>(_hiveBoxName);
+  Box<List<String>> _getBox() => SentryHive.box<List<String>>(_hiveBoxName);
 
   List<String> getAll(final String key) =>
       _getBox().get(key, defaultValue: <String>[])!;

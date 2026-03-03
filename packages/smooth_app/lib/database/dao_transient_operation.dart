@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:hive/hive.dart';
+import 'package:sentry_hive/sentry_hive.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:smooth_app/database/abstract_dao.dart';
 
@@ -59,12 +60,12 @@ class DaoTransientOperation extends AbstractDao {
   static const String _hiveBoxName = 'transientOperations';
 
   @override
-  Future<void> init() async => Hive.openBox<Product>(_hiveBoxName);
+  Future<void> init() async => SentryHive.openBox<Product>(_hiveBoxName);
 
   @override
-  void registerAdapter() => Hive.registerAdapter(_ProductAdapter());
+  void registerAdapter() => SentryHive.registerAdapter(_ProductAdapter());
 
-  Box<Product> _getBox() => Hive.box<Product>(_hiveBoxName);
+  Box<Product> _getBox() => SentryHive.box<Product>(_hiveBoxName);
 
   Product? get(final String key) => _getBox().get(key);
 

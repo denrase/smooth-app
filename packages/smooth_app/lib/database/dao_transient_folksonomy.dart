@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:hive/hive.dart';
+import 'package:sentry_hive/sentry_hive.dart';
 import 'package:smooth_app/database/abstract_dao.dart';
 import 'package:smooth_app/pages/folksonomy/folksonomy_operation.dart';
 
@@ -10,12 +11,12 @@ class DaoTransientFolksonomy extends AbstractDao {
   static const String _hiveBoxName = 'transientFolksonomyOperations';
 
   @override
-  Future<void> init() async => Hive.openBox<String>(_hiveBoxName);
+  Future<void> init() async => SentryHive.openBox<String>(_hiveBoxName);
 
   @override
   void registerAdapter() {}
 
-  Box<String> _getBox() => Hive.box<String>(_hiveBoxName);
+  Box<String> _getBox() => SentryHive.box<String>(_hiveBoxName);
 
   List<FolksonomyOperation>? get(final String barcode) {
     final String? value = _getBox().get(barcode);

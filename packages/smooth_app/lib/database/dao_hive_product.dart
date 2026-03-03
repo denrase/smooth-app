@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:hive/hive.dart';
+import 'package:sentry_hive/sentry_hive.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:smooth_app/database/abstract_dao.dart';
 
@@ -30,8 +31,8 @@ class DaoHiveProduct extends AbstractDao {
   static const String _hiveBoxName = 'products';
 
   @override
-  Future<void> init() async => Hive.openLazyBox<Product>(_hiveBoxName);
+  Future<void> init() async => SentryHive.openLazyBox<Product>(_hiveBoxName);
 
   @override
-  void registerAdapter() => Hive.registerAdapter(_ProductAdapter());
+  void registerAdapter() => SentryHive.registerAdapter(_ProductAdapter());
 }

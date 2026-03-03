@@ -1,4 +1,5 @@
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hive/hive.dart';
+import 'package:sentry_hive/sentry_hive.dart';
 import 'package:smooth_app/database/abstract_dao.dart';
 
 /// Where we store strings that need INSTANT access (= not lazy, no await).
@@ -8,12 +9,12 @@ class DaoInstantString extends AbstractDao {
   static const String _hiveBoxName = 'instantString';
 
   @override
-  Future<void> init() async => Hive.openBox<String>(_hiveBoxName);
+  Future<void> init() async => SentryHive.openBox<String>(_hiveBoxName);
 
   @override
   void registerAdapter() {}
 
-  Box<String> _getBox() => Hive.box<String>(_hiveBoxName);
+  Box<String> _getBox() => SentryHive.box<String>(_hiveBoxName);
 
   String? get(final String key) => _getBox().get(key);
 

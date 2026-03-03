@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/rendering.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:smooth_app/background/background_task.dart';
 import 'package:smooth_app/background/background_task_queue.dart';
 import 'package:smooth_app/background/background_task_refresh_later.dart';
@@ -238,7 +239,17 @@ class BackgroundTaskManager {
         }
         try {
           await _setTaskErrorStatus(taskId, taskStatusStarted);
-          await task.execute(localDatabase);
+          await Sentry.startSpan('background_task.execute', (span) async {
+            span.setAttribute(
+              'task_type',
+              SentryAttribute.string(task.runtimeType.toString()),
+            );
+            span.setAttribute(
+              'task_id',
+              SentryAttribute.string(taskId),
+            );
+            await task.execute(localDatabase);
+          });
           await _finishTask(taskId, success: true);
           if (task.hasImmediateNextTask) {
             runAgain = true;

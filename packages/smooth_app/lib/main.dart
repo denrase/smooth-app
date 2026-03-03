@@ -88,13 +88,9 @@ Future<void> launchSmoothApp({
 
   _enableEdgeToEdgeMode();
 
-  if (kReleaseMode) {
-    await AnalyticsHelper.initSentry(
-      appRunner: () => runApp(const SmoothApp()),
-    );
-  } else {
-    runApp(const SmoothApp());
-  }
+  await AnalyticsHelper.initSentry(
+    appRunner: () => runApp(const SmoothApp()),
+  );
 }
 
 void _enableEdgeToEdgeMode() {

@@ -234,7 +234,7 @@ class AnalyticsHelper {
     await SentryFlutter.init((SentryOptions options) {
       options
         ..dsn =
-            'https://22ec5d0489534b91ba455462d3736680@o241488.ingest.sentry.io/5376745'
+            'https://3a3015be06c8a5817a50e7a9f98ef94a@o376011.ingest.us.sentry.io/4510980127784960'
         ..beforeSend = (SentryEvent event, Hint hint) async {
           return event
             ..tags = <String, String>{

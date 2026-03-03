@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:provider/provider.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:smooth_app/data_models/fetched_product.dart';
 import 'package:smooth_app/database/local_database.dart';
 import 'package:smooth_app/generic_lib/buttons/smooth_large_button_with_icon.dart';
@@ -45,41 +46,47 @@ class _ProductLoaderPageState extends State<ProductLoaderPage> {
       _state = _ProductLoaderState.loading;
     });
 
-    final FetchedProduct fetchedProduct = await ProductRefresher()
-        .silentFetchAndRefresh(
-          barcode: widget.barcode,
-          localDatabase: context.read<LocalDatabase>(),
-        );
+    await Sentry.startSpan('product.load', (span) async {
+      span.setAttribute('barcode', SentryAttribute.string(widget.barcode));
 
-    if (mounted) {
-      if (fetchedProduct.product != null) {
-        if (widget.mode == ProductLoaderMode.viewProduct) {
-          navigator.pushReplacement(
-            AppRoutes.PRODUCT(
-              widget.barcode,
-              heroTag: 'product_${widget.barcode}',
-            ),
-            extra: fetchedProduct.product,
+      final FetchedProduct fetchedProduct = await ProductRefresher()
+          .silentFetchAndRefresh(
+            barcode: widget.barcode,
+            localDatabase: context.read<LocalDatabase>(),
           );
-        } else if (widget.mode == ProductLoaderMode.editProduct) {
-          navigator.pushReplacement(
-            AppRoutes.PRODUCT_EDITOR(widget.barcode),
-            extra: fetchedProduct.product,
-          );
+
+      if (mounted) {
+        if (fetchedProduct.product != null) {
+          if (widget.mode == ProductLoaderMode.viewProduct) {
+            navigator.pushReplacement(
+              AppRoutes.PRODUCT(
+                widget.barcode,
+                heroTag: 'product_${widget.barcode}',
+              ),
+              extra: fetchedProduct.product,
+            );
+          } else if (widget.mode == ProductLoaderMode.editProduct) {
+            navigator.pushReplacement(
+              AppRoutes.PRODUCT_EDITOR(widget.barcode),
+              extra: fetchedProduct.product,
+            );
+          }
+          return;
         }
-        return;
-      }
-      if (fetchedProduct.status == FetchedProductStatus.internetNotFound) {
+        if (fetchedProduct.status == FetchedProductStatus.internetNotFound) {
+          span.status = SentrySpanStatusV2.error;
+          setState(() {
+            _state = _ProductLoaderState.productNotFound;
+          });
+          return;
+        }
+        span.status = SentrySpanStatusV2.error;
         setState(() {
-          _state = _ProductLoaderState.productNotFound;
+          // TODO(monsieurtanuki): put more details from FetchedProduct?
+          _state = _ProductLoaderState.serverError;
         });
-        return;
       }
-      setState(() {
-        // TODO(monsieurtanuki): put more details from FetchedProduct?
-        _state = _ProductLoaderState.serverError;
-      });
-    }
+    });
   }
 
   @override

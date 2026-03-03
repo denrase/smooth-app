@@ -275,3 +275,6 @@ packages/smooth_app/ios/Runner/vls.lproj/InfoPlist.strings
 packages/smooth_app/ios/Runner/zea.lproj/InfoPlist.strings
 *.pyc
 __pycache__/
+
+# Maestro validation reports
+maestro/reports/

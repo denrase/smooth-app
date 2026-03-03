@@ -1,0 +1,37 @@
+appId: org.openfoodfacts.scanner
+---
+# Flow 5: Product Edit
+# Triggers: background_task.lifecycle span (startInactiveSpan),
+#           background_task.execute span, Hive db spans
+# Expected hierarchy: background_task.lifecycle -> background_task.execute
+
+- launchApp
+- waitForAnimationToEnd
+
+# Search for a product
+- tapOn: "Search"
+- waitForAnimationToEnd
+- inputText: "3017620422003"
+- pressKey: enter
+- waitForAnimationToEnd
+
+# Wait and tap on product
+- extendedWaitUntil:
+    visible: "Nutella"
+    timeout: 15000
+- tapOn: "Nutella"
+- waitForAnimationToEnd
+
+# Open edit page
+- tapOn: "Edit"
+- waitForAnimationToEnd
+
+# Scroll to see edit options
+- scroll
+- waitForAnimationToEnd
+
+# Go back without saving (to avoid modifying real data)
+- back
+- waitForAnimationToEnd
+- back
+- waitForAnimationToEnd

@@ -1,0 +1,11 @@
+appId: org.openfoodfacts.scanner
+---
+# Flow 1: App Launch
+# Triggers: app start spans, Sentry initialization, Hive DB init spans
+# Expected spans: app.start, SentryHive openBox/openLazyBox spans
+
+- launchApp:
+    clearState: true
+- waitForAnimationToEnd
+- assertVisible: ".*"  # assert any content is visible (app launched)
+- waitForAnimationToEnd

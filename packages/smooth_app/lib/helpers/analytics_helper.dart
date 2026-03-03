@@ -287,7 +287,10 @@ class AnalyticsHelper {
   }
 
   static void _beforeSendSpan(SentrySpanV2 span) {
-    debugPrint('[Sentry] Span: ${span.name} (${span.status})');
+    debugPrint(
+      '[SentrySpanFirst] Span: ${span.name} (${span.status}) '
+      'trace=${span.traceId} span=${span.spanId}',
+    );
   }
 
   static late PackageInfo _packageInfo;

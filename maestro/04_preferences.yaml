@@ -1,0 +1,22 @@
+appId: org.openfoodfacts.scanner
+---
+# Flow 4: Preferences
+# Triggers: navigation spans, potential Hive read/write spans
+# Tests that settings page interactions generate db spans
+
+- launchApp
+- waitForAnimationToEnd
+
+# Open settings/preferences
+- tapOn: "Settings"
+- waitForAnimationToEnd
+
+# Scroll through preferences
+- scroll
+- waitForAnimationToEnd
+- scroll
+- waitForAnimationToEnd
+
+# Go back
+- back
+- waitForAnimationToEnd

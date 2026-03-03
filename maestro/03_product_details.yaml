@@ -1,0 +1,34 @@
+appId: org.openfoodfacts.scanner
+---
+# Flow 3: Product Details via Deep Link / Barcode
+# Triggers: product.load span (ProductLoaderPage)
+# Expected spans: product.load with barcode attribute
+
+- launchApp
+- waitForAnimationToEnd
+
+# Navigate to search and look up a known barcode
+- tapOn: "Search"
+- waitForAnimationToEnd
+- inputText: "3017620422003"
+- pressKey: enter
+- waitForAnimationToEnd
+
+# Wait for product to load
+- extendedWaitUntil:
+    visible: "Nutella"
+    timeout: 15000
+
+# Tap on the product
+- tapOn: "Nutella"
+- waitForAnimationToEnd
+
+# Scroll through tabs and content
+- scroll
+- waitForAnimationToEnd
+- scroll
+- waitForAnimationToEnd
+
+# Go back
+- back
+- waitForAnimationToEnd

@@ -235,20 +235,21 @@ class AnalyticsHelper {
       options
         ..dsn =
             'https://3a3015be06c8a5817a50e7a9f98ef94a@o376011.ingest.us.sentry.io/4510980127784960'
-        ..beforeSend = (SentryEvent event, Hint hint) async {
-          return event
-            ..tags = <String, String>{
-              'store': GlobalVars.storeLabel.name,
-              'scanner': GlobalVars.scannerLabel.name,
-            };
-        };
-      // To set a uniform sample rate
-      options
         ..tracesSampleRate = 1.0
+        ..traceLifecycle = SentryTraceLifecycle.streaming
         ..beforeSend = _beforeSend
+        ..beforeSendSpan = _beforeSendSpan
         ..captureFailedRequests = false
         ..environment =
             '${GlobalVars.storeLabel.name}-${GlobalVars.scannerLabel.name}';
+      options.tags.addAll(<String, String>{
+        'store': GlobalVars.storeLabel.name,
+        'scanner': GlobalVars.scannerLabel.name,
+      });
+      options.ignoreSpans = <IgnoreSpanRule>[
+        // Add rules to filter noisy spans, e.g.:
+        // IgnoreSpanRule.nameContains('some-pattern'),
+      ];
     }, appRunner: appRunner);
   }
 
@@ -283,6 +284,10 @@ class AnalyticsHelper {
       return null;
     }
     return event;
+  }
+
+  static void _beforeSendSpan(SentrySpanV2 span) {
+    debugPrint('[Sentry] Span: ${span.name} (${span.status})');
   }
 
   static late PackageInfo _packageInfo;

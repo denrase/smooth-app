@@ -21,6 +21,11 @@ class BackgroundTaskManager {
   final LocalDatabase localDatabase;
   final BackgroundTaskQueue queue;
 
+  /// Spans tracking background task lifecycle from queue to execution.
+  /// Uses [startInactiveSpan] because the span lifetime crosses [add] and
+  /// [_runAsync] — a callback-based [startSpan] cannot express this.
+  final Map<String, SentrySpanV2> _taskSpans = <String, SentrySpanV2>{};
+
   static Map<BackgroundTaskQueue, BackgroundTaskManager>? _instances;
 
   static BackgroundTaskManager getInstance(
@@ -76,6 +81,14 @@ class BackgroundTaskManager {
   /// Adds a task to the pending task list.
   Future<void> add(final BackgroundTask task) async {
     final String taskId = task.uniqueId;
+    // ignore: invalid_use_of_internal_member
+    _taskSpans[taskId] = Sentry.currentHub.startInactiveSpan(
+      'background_task.lifecycle',
+      attributes: <String, SentryAttribute>{
+        'task_type': SentryAttribute.string(task.runtimeType.toString()),
+        'task_id': SentryAttribute.string(taskId),
+      },
+    );
     await DaoInstantString(
       localDatabase,
     ).put(_taskIdToDaoInstantStringKey(taskId), jsonEncode(task.toJson()));
@@ -237,24 +250,32 @@ class BackgroundTaskManager {
           _debugPrint('stale task $taskId');
           continue;
         }
+        final SentrySpanV2? lifecycleSpan = _taskSpans.remove(taskId);
         try {
           await _setTaskErrorStatus(taskId, taskStatusStarted);
-          await Sentry.startSpan('background_task.execute', (span) async {
-            span.setAttribute(
-              'task_type',
-              SentryAttribute.string(task.runtimeType.toString()),
-            );
-            span.setAttribute(
-              'task_id',
-              SentryAttribute.string(taskId),
-            );
-            await task.execute(localDatabase);
-          });
+          await Sentry.startSpan(
+            'background_task.execute',
+            (span) async {
+              span.setAttribute(
+                'task_type',
+                SentryAttribute.string(task.runtimeType.toString()),
+              );
+              span.setAttribute(
+                'task_id',
+                SentryAttribute.string(taskId),
+              );
+              await task.execute(localDatabase);
+            },
+            parentSpan: lifecycleSpan,
+          );
+          lifecycleSpan?.end();
           await _finishTask(taskId, success: true);
           if (task.hasImmediateNextTask) {
             runAgain = true;
           }
         } catch (e) {
+          lifecycleSpan?.status = SentrySpanStatusV2.error;
+          lifecycleSpan?.end();
           // Most likely, no internet, no reason to go on.
           if (LoginResult.isNoNetworkException(e.toString())) {
             await _setTaskErrorStatus(taskId, taskStatusNoInternet);

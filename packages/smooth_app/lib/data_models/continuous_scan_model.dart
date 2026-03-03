@@ -9,6 +9,7 @@ import 'package:smooth_app/database/dao_product.dart';
 import 'package:smooth_app/database/dao_product_list.dart';
 import 'package:smooth_app/database/local_database.dart';
 import 'package:smooth_app/generic_lib/duration_constants.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:smooth_app/helpers/analytics_helper.dart';
 import 'package:smooth_app/helpers/collections_helper.dart';
 import 'package:smooth_app/query/barcode_product_query.dart';
@@ -128,7 +129,10 @@ class ContinuousScanModel with ChangeNotifier {
     AnalyticsHelper.trackEvent(AnalyticsEvent.scanAction, barcode: code);
 
     _latestScannedBarcode = code;
-    return _addBarcode(code);
+    return Sentry.startSpan('product.scan', (span) async {
+      span.setAttribute('barcode', SentryAttribute.string(code));
+      return _addBarcode(code);
+    });
   }
 
   Future<bool> onCreateProduct(String? barcode) async {
@@ -179,36 +183,40 @@ class ContinuousScanModel with ChangeNotifier {
   }
 
   Future<bool> _cachedBarcode(final String barcode) async {
-    final Product? product = await _daoProduct.get(barcode);
-    if (product != null) {
-      try {
-        // We try to load the fresh copy of product from the server
-        final FetchedProduct fetchedProduct = await _queryBarcode(
-          barcode,
-        ).timeout(SnackBarDuration.long);
-        if (fetchedProduct.product != null) {
-          if (fetchedProduct.isValid) {
-            _addProduct(barcode, ScannedProductState.CACHED);
-            return true;
-          } else {
-            _setBarcodeState(
-              barcode,
-              ScannedProductState.FOUND_BUT_CONSIDERED_AS_NOT_FOUND,
-            );
-            return true;
+    return Sentry.startSpan('product.cache_lookup', (span) async {
+      span.setAttribute('barcode', SentryAttribute.string(barcode));
+      final Product? product = await _daoProduct.get(barcode);
+      if (product != null) {
+        try {
+          // We try to load the fresh copy of product from the server
+          final FetchedProduct fetchedProduct = await _queryBarcode(
+            barcode,
+          ).timeout(SnackBarDuration.long);
+          if (fetchedProduct.product != null) {
+            if (fetchedProduct.isValid) {
+              _addProduct(barcode, ScannedProductState.CACHED);
+              return true;
+            } else {
+              _setBarcodeState(
+                barcode,
+                ScannedProductState.FOUND_BUT_CONSIDERED_AS_NOT_FOUND,
+              );
+              return true;
+            }
           }
+        } on TimeoutException {
+          span.status = SentrySpanStatusV2.deadlineExceeded;
+          // We tried to load the product from the server,
+          // but it was taking more than 5 seconds.
+          // So we'll just show the already cached product.
+          _addProduct(barcode, ScannedProductState.CACHED);
+          return true;
         }
-      } on TimeoutException {
-        // We tried to load the product from the server,
-        // but it was taking more than 5 seconds.
-        // So we'll just show the already cached product.
         _addProduct(barcode, ScannedProductState.CACHED);
         return true;
       }
-      _addProduct(barcode, ScannedProductState.CACHED);
-      return true;
-    }
-    return false;
+      return false;
+    });
   }
 
   Future<FetchedProduct> _queryBarcode(final String barcode) async =>
@@ -219,28 +227,34 @@ class ContinuousScanModel with ChangeNotifier {
       ).getFetchedProduct();
 
   Future<void> _loadBarcode(final String barcode) async {
-    final FetchedProduct fetchedProduct = await _queryBarcode(barcode);
-    switch (fetchedProduct.status) {
-      case FetchedProductStatus.ok:
-        if (fetchedProduct.isValid) {
-          _addProduct(barcode, ScannedProductState.FOUND);
-        } else {
-          _setBarcodeState(
-            barcode,
-            ScannedProductState.FOUND_BUT_CONSIDERED_AS_NOT_FOUND,
-          );
-        }
-        return;
-      case FetchedProductStatus.internetNotFound:
-        _setBarcodeState(barcode, ScannedProductState.NOT_FOUND);
-        return;
-      case FetchedProductStatus.internetError:
-        _setBarcodeState(barcode, ScannedProductState.ERROR_INTERNET);
-        return;
-      case FetchedProductStatus.userCancelled:
-        // we do nothing
-        return;
-    }
+    await Sentry.startSpan('product.fetch', (span) async {
+      span.setAttribute('barcode', SentryAttribute.string(barcode));
+      final FetchedProduct fetchedProduct = await _queryBarcode(barcode);
+      switch (fetchedProduct.status) {
+        case FetchedProductStatus.ok:
+          if (fetchedProduct.isValid) {
+            _addProduct(barcode, ScannedProductState.FOUND);
+          } else {
+            _setBarcodeState(
+              barcode,
+              ScannedProductState.FOUND_BUT_CONSIDERED_AS_NOT_FOUND,
+            );
+          }
+          return;
+        case FetchedProductStatus.internetNotFound:
+          span.status = SentrySpanStatusV2.error;
+          _setBarcodeState(barcode, ScannedProductState.NOT_FOUND);
+          return;
+        case FetchedProductStatus.internetError:
+          span.status = SentrySpanStatusV2.error;
+          _setBarcodeState(barcode, ScannedProductState.ERROR_INTERNET);
+          return;
+        case FetchedProductStatus.userCancelled:
+          span.status = SentrySpanStatusV2.cancelled;
+          // we do nothing
+          return;
+      }
+    });
   }
 
   Future<void> _updateBarcode(final String barcode) async {

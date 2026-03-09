@@ -47,6 +47,8 @@ class DevModeRoot extends PreferencesRoot {
         title: appLocalizations.preferences_dev_mode_demo_mode_title,
         tiles: <PreferenceTile>[
           _buildAddCardsTile(context, appLocalizations),
+          _buildScanErrorTile(context, appLocalizations),
+          _buildScanTimeoutTile(context, appLocalizations),
           _buildResetOnboardingTile(context, appLocalizations, userPreferences),
         ],
       ),
@@ -152,6 +154,69 @@ class DevModeRoot extends PreferencesRoot {
         ];
         for (int i = 0; i < barcodes.length; i++) {
           await model.onScan(barcodes[i]);
+        }
+      },
+    );
+  }
+
+  /// 4a.5: Scans a non-existent barcode to trigger the error span status path.
+  /// Flow: onScan → product.scan → _loadBarcode → product.fetch →
+  ///   internetNotFound → span.status = SentrySpanStatusV2.error
+  PreferenceTile _buildScanErrorTile(
+    BuildContext context,
+    AppLocalizations appLocalizations,
+  ) {
+    return PreferenceTile(
+      title: 'Scan (simulate error)',
+      icon: const icons.Clear(),
+      onTap: () async {
+        final ContinuousScanModel model = context.read<ContinuousScanModel>();
+        // Barcode that doesn't exist on OpenFoodFacts → internetNotFound
+        await model.onScan('0000000000000');
+        if (context.mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Scanned non-existent barcode → error span')),
+          );
+        }
+      },
+    );
+  }
+
+  /// 4a.6: Scans a cached product with a simulated network timeout to trigger
+  /// the deadlineExceeded span status path.
+  /// Flow: onScan → product.scan → _cachedBarcode → product.cache_lookup →
+  ///   _queryBarcode (delayed >5s) → TimeoutException →
+  ///   span.status = SentrySpanStatusV2.deadlineExceeded
+  PreferenceTile _buildScanTimeoutTile(
+    BuildContext context,
+    AppLocalizations appLocalizations,
+  ) {
+    return PreferenceTile(
+      title: 'Scan (simulate timeout)',
+      icon: const icons.HourGlass(),
+      onTap: () async {
+        final ContinuousScanModel model = context.read<ContinuousScanModel>();
+        const String barcode = '3017620425035'; // Nutella — known to exist
+
+        // Step 1: Scan normally to ensure the product is cached in the local DB
+        await model.onScan(barcode);
+
+        // Step 2: Clear the scan session (removes from _barcodes/_states but
+        // keeps the product in the Hive cache via DaoProduct)
+        await model.clearScanSession();
+
+        // Step 3: Enable timeout simulation and rescan
+        model.debugSimulateTimeout = true;
+        try {
+          await model.onScan(barcode);
+        } finally {
+          model.debugSimulateTimeout = false;
+        }
+
+        if (context.mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Scanned cached product with timeout → deadlineExceeded span')),
+          );
         }
       },
     );

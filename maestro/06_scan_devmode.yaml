@@ -1,0 +1,67 @@
+appId: org.openfoodfacts.scanner
+---
+# Flow 6: Scan via Dev Mode (bypasses camera)
+# Triggers: product.scan, product.cache_lookup, product.fetch spans
+# Tests 4a.1-4a.4 (normal scan), 4a.5 (error), 4a.6 (timeout)
+
+- launchApp
+- waitForAnimationToEnd
+- extendedWaitUntil:
+    visible: "maestro_search_bar"
+    timeout: 10000
+- takeScreenshot: 06_01_home
+
+# Navigate to Community (Profile) tab
+- tapOn: "Community"
+- waitForAnimationToEnd
+
+# Use the search bar to find "About the app" directly
+- tapOn: "Search for a setting.*"
+- inputText: "About the app"
+- waitForAnimationToEnd
+- tapOn: "About the app"
+- waitForAnimationToEnd
+- takeScreenshot: 06_02_about_app
+
+# Enable Dev Mode toggle
+- scrollUntilVisible:
+    element: "DEV Mode?"
+    direction: DOWN
+    timeout: 10000
+    centerElement: true
+- tapOn: "DEV Mode?"
+- waitForAnimationToEnd
+- takeScreenshot: 06_03_dev_enabled
+
+# Go back to Community/preferences page
+- back
+- waitForAnimationToEnd
+
+# Clear search and search for Labs
+- tapOn: "Search for a setting.*"
+- eraseText: 20
+- inputText: "Labs"
+- waitForAnimationToEnd
+- tapOn: "Open Food Facts Labs"
+- waitForAnimationToEnd
+- takeScreenshot: 06_04_labs
+
+# --- Test 4a.1-4a.4: Normal scan via "Add cards" ---
+- tapOn: "Add cards"
+- waitForAnimationToEnd
+- takeScreenshot: 06_05_demo_cards
+
+# --- Test 4a.5: Error scan ---
+- tapOn: "Scan (simulate error)"
+- extendedWaitUntil:
+    visible: "error span"
+    timeout: 15000
+- takeScreenshot: 06_06_scan_error
+
+# --- Test 4a.6: Timeout scan (takes ~5s for TimeoutException) ---
+- tapOn: "Scan (simulate timeout)"
+# The timeout simulation needs >5s for TimeoutException to fire
+- extendedWaitUntil:
+    visible: "deadlineExceeded span"
+    timeout: 30000
+- takeScreenshot: 06_07_scan_timeout

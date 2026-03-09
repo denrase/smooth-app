@@ -23,6 +23,8 @@ import 'package:smooth_app/data_models/user_management_provider.dart';
 import 'package:smooth_app/database/dao_string.dart';
 import 'package:smooth_app/database/local_database.dart';
 import 'package:smooth_app/generic_lib/animations/rive_animation.dart';
+import 'package:smooth_app/background/background_task_language_refresh.dart';
+import 'package:smooth_app/background/background_task_manager.dart';
 import 'package:smooth_app/helpers/analytics_helper.dart';
 import 'package:smooth_app/helpers/camera_helper.dart';
 import 'package:smooth_app/helpers/entry_points_helper.dart';
@@ -62,14 +64,20 @@ void main() {
 
 late final bool _screenshots;
 
+/// Optional callback executed after full init (both _init1 and _init2) but
+/// before the UI is shown. Used by the scan-validation entrypoint.
+Future<void> Function()? _onPostInit;
+
 Future<void> launchSmoothApp({
   required Scanner barcodeScanner,
   required AppStore appStore,
   required StoreLabel storeLabel,
   required ScannerLabel scannerLabel,
   final bool screenshots = false,
+  Future<void> Function()? onPostInit,
 }) async {
   _screenshots = screenshots;
+  _onPostInit = onPostInit;
 
   GlobalVars.barcodeScanner = barcodeScanner;
   GlobalVars.appStore = appStore;
@@ -160,6 +168,80 @@ Future<bool> _init1() async {
   return true;
 }
 
+/// Exercises scan span error/timeout paths on startup so we can validate
+/// 4a.5 (SentrySpanStatusV2.error) and 4a.6 (deadlineExceeded) without camera.
+/// Called from `main_ios_scan_validation.dart` entrypoint only.
+///
+/// Note: `_addBarcode` fires off `_cacheOrLoadBarcode` without awaiting it,
+/// so `onScan` returns before child spans (product.cache_lookup, product.fetch)
+/// complete. We poll `getBarcodeState` to wait for the background work to finish.
+Future<void> validateScanSpanPaths() async {
+  debugPrint('[ScanValidation] Starting scan span path validation...');
+
+  // 4a.1-4a.4: Normal scan (product.scan → product.cache_lookup / product.fetch)
+  debugPrint('[ScanValidation] 4a.1-4a.4: Normal scan...');
+  await _continuousScanModel.onScan('3017620425035'); // Nutella
+  await _waitForScanState('3017620425035');
+  debugPrint('[ScanValidation] 4a.1-4a.4: Done.');
+
+  // 4a.5: Error path — non-existent barcode → internetNotFound → error status
+  debugPrint('[ScanValidation] 4a.5: Scanning non-existent barcode...');
+  await _continuousScanModel.onScan('0000000000000');
+  await _waitForScanState('0000000000000');
+  debugPrint('[ScanValidation] 4a.5: Done.');
+
+  // 4a.6: Timeout path — rescan cached product with simulated timeout
+  debugPrint('[ScanValidation] 4a.6: Clearing session for timeout test...');
+  await _continuousScanModel.clearScanSession();
+  _continuousScanModel.debugSimulateTimeout = true;
+  debugPrint('[ScanValidation] 4a.6: Rescanning cached product (will timeout in ~5s)...');
+  await _continuousScanModel.onScan('3017620425035');
+  await _waitForScanState('3017620425035');
+  _continuousScanModel.debugSimulateTimeout = false;
+  debugPrint('[ScanValidation] 4a.6: Done.');
+
+  // Wait for async span delivery to Sentry
+  await Future<void>.delayed(const Duration(seconds: 2));
+
+  // 4d/4e: startInactiveSpan — background task lifecycle
+  // BackgroundTaskLanguageRefresh doesn't require login. It goes through:
+  //   add() → startInactiveSpan('background_task.lifecycle')
+  //   _runAsync() → startSpan('background_task.execute', parentSpan: lifecycle)
+  //   lifecycle.end()
+  debugPrint('[ScanValidation] 4d/4e: Triggering background task (language refresh)...');
+  await BackgroundTaskLanguageRefresh.addTask(_localDatabase);
+  // Wait for the task manager to pick up and execute the task.
+  // addTask → add() creates the lifecycle span immediately, then _run()
+  // picks it up async. Give it time to execute + send spans.
+  debugPrint('[ScanValidation] 4d/4e: Waiting for background task execution...');
+  // Language refresh tasks make network calls to the OFF API per ProductType.
+  // Wait long enough for all 5 tasks to execute + spans to be sent.
+  await Future<void>.delayed(const Duration(seconds: 30));
+  debugPrint('[ScanValidation] 4d/4e: Done.');
+
+  // Wait for async span delivery
+  await Future<void>.delayed(const Duration(seconds: 3));
+
+  // Clean up
+  await _continuousScanModel.clearScanSession();
+  debugPrint('[ScanValidation] All scan span paths validated.');
+  exit(0);
+}
+
+/// Polls until the barcode leaves the LOADING state (i.e. the background
+/// network call in `_cacheOrLoadBarcode` has finished).
+Future<void> _waitForScanState(String barcode) async {
+  for (int i = 0; i < 60; i++) {
+    final state = _continuousScanModel.getBarcodeState(barcode);
+    if (state != null && state != ScannedProductState.LOADING) {
+      debugPrint('[ScanValidation]   $barcode → $state');
+      return;
+    }
+    await Future<void>.delayed(const Duration(milliseconds: 500));
+  }
+  debugPrint('[ScanValidation]   $barcode → timed out waiting (still LOADING)');
+}
+
 class _SmoothAppState extends State<SmoothApp> {
   final UserManagementProvider _userManagementProvider =
       UserManagementProvider();
@@ -189,6 +271,11 @@ class _SmoothAppState extends State<SmoothApp> {
     if (!_screenshots) {
       await _userPreferences.init(_productPreferences);
     }
+
+    if (_onPostInit != null) {
+      await _onPostInit!();
+    }
+
     return true;
   }
 

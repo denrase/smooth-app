@@ -36,6 +36,11 @@ class ContinuousScanModel with ChangeNotifier {
   final ProductList _scanHistory = ProductList.scanHistory();
   final ProductList _history = ProductList.history();
 
+  /// When true, [_queryBarcode] delays beyond the timeout threshold (5s)
+  /// so that [_cachedBarcode] hits the [TimeoutException] → deadlineExceeded
+  /// span status path. Used only from Dev Mode for testing 4a.6.
+  bool debugSimulateTimeout = false;
+
   String? _latestScannedBarcode;
   String? _latestFoundBarcode;
   String? _latestConsultedBarcode;
@@ -226,12 +231,19 @@ class ContinuousScanModel with ChangeNotifier {
     });
   }
 
-  Future<FetchedProduct> _queryBarcode(final String barcode) async =>
-      BarcodeProductQuery(
-        barcode: barcode,
-        daoProduct: _daoProduct,
-        isScanned: true,
-      ).getFetchedProduct();
+  Future<FetchedProduct> _queryBarcode(final String barcode) async {
+    if (debugSimulateTimeout) {
+      // Delay longer than SnackBarDuration.long (5s) to trigger TimeoutException
+      // in _cachedBarcode. Used for validating 4a.6 deadlineExceeded span status.
+      await Future<void>.delayed(const Duration(seconds: 10));
+      return const FetchedProduct.internetNotFound();
+    }
+    return BarcodeProductQuery(
+      barcode: barcode,
+      daoProduct: _daoProduct,
+      isScanned: true,
+    ).getFetchedProduct();
+  }
 
   Future<void> _loadBarcode(final String barcode) async {
     await Sentry.startSpan('product.fetch', (span) async {

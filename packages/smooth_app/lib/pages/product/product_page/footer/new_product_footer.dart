@@ -345,17 +345,16 @@ class _ProductFooterFilledButton extends StatelessWidget {
       child: icon,
     );
 
-    return Semantics(
-      excludeSemantics: true,
-      button: true,
-      label: semanticsLabel,
-      child: OutlinedButton(
-        onPressed: onTap,
-        style: OutlinedButton.styleFrom(
-          foregroundColor: foregroundColor,
-          backgroundColor: backgroundColor,
-          side: BorderSide.none,
-        ),
+    return OutlinedButton(
+      onPressed: onTap,
+      style: OutlinedButton.styleFrom(
+        foregroundColor: foregroundColor,
+        backgroundColor: backgroundColor,
+        side: BorderSide.none,
+      ),
+      child: Semantics(
+        label: semanticsLabel,
+        excludeSemantics: true,
         child: label == null
             ? child
             : Row(
@@ -407,18 +406,17 @@ class _ProductFooterOutlinedButton extends StatelessWidget {
       child: icon,
     );
 
-    return Semantics(
-      label: semanticsLabel,
-      excludeSemantics: true,
-      button: true,
-      child: OutlinedButton(
-        onPressed: onTap,
-        style: OutlinedButton.styleFrom(
-          foregroundColor: foregroundColor,
-          backgroundColor: enabled
-              ? Colors.transparent
-              : (lightTheme ? Colors.grey.shade300 : Colors.black12),
-        ),
+    return OutlinedButton(
+      onPressed: onTap,
+      style: OutlinedButton.styleFrom(
+        foregroundColor: foregroundColor,
+        backgroundColor: enabled
+            ? Colors.transparent
+            : (lightTheme ? Colors.grey.shade300 : Colors.black12),
+      ),
+      child: Semantics(
+        label: semanticsLabel,
+        excludeSemantics: true,
         child: label == null
             ? child
             : Row(

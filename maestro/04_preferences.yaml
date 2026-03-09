@@ -6,17 +6,22 @@ appId: org.openfoodfacts.scanner
 
 - launchApp
 - waitForAnimationToEnd
+- takeScreenshot: 04_01_home
 
-# Open settings/preferences
-- tapOn: "Settings"
+# Open settings/preferences via the Community tab
+- tapOn: "Community"
 - waitForAnimationToEnd
+- takeScreenshot: 04_02_community
 
 # Scroll through preferences
 - scroll
 - waitForAnimationToEnd
+- takeScreenshot: 04_03_scrolled_1
 - scroll
 - waitForAnimationToEnd
+- takeScreenshot: 04_04_scrolled_2
 
 # Go back
 - back
 - waitForAnimationToEnd
+- takeScreenshot: 04_05_back

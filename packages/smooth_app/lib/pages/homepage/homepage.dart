@@ -1,9 +1,6 @@
-// ignore_for_file: depend_on_referenced_packages
-
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
-import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 import 'package:smooth_app/helpers/system_ui_helper.dart';
@@ -60,9 +57,7 @@ class HomePageState extends State<HomePage> {
     super.initState();
 
     _controller = ScrollController();
-    _cameraController = CustomScannerController(
-      controller: MobileScannerController(autoStart: false),
-    );
+    _cameraController = CustomScannerController();
     _lifecycleListener = AppLifecycleListener(
       onPause: _onPause,
       onResume: _onResume,

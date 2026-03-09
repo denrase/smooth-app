@@ -242,15 +242,16 @@ class AnalyticsHelper {
         ..captureFailedRequests = false
         ..environment =
             '${GlobalVars.storeLabel.name}-${GlobalVars.scannerLabel.name}';
-      options.tags.addAll(<String, String>{
-        'store': GlobalVars.storeLabel.name,
-        'scanner': GlobalVars.scannerLabel.name,
-      });
       options.ignoreSpans = <IgnoreSpanRule>[
         // Add rules to filter noisy spans, e.g.:
         // IgnoreSpanRule.nameContains('some-pattern'),
       ];
     }, appRunner: appRunner);
+
+    Sentry.configureScope((Scope scope) {
+      scope.setTag('store', GlobalVars.storeLabel.name);
+      scope.setTag('scanner', GlobalVars.scannerLabel.name);
+    });
   }
 
   /// Don't call this method directly, it is automatically updated via the

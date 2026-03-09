@@ -129,15 +129,16 @@ class ContinuousScanModel with ChangeNotifier {
     AnalyticsHelper.trackEvent(AnalyticsEvent.scanAction, barcode: code);
 
     _latestScannedBarcode = code;
+    final String barcode = code;
     return Sentry.startSpan('product.scan', (span) async {
-      span.setAttribute('barcode', SentryAttribute.string(code));
+      span.setAttribute('barcode', SentryAttribute.string(barcode));
       // Validate configureScope inside startSpan: the 'flow' tag should only
       // propagate to children (product.cache_lookup, product.fetch) and NOT
       // to spans created outside this callback. Verify in Sentry UI.
       await Sentry.configureScope((scope) {
         scope.setTag('flow', 'scanning');
       });
-      return _addBarcode(code);
+      return _addBarcode(barcode);
     });
   }
 

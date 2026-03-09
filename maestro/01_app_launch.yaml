@@ -9,3 +9,4 @@ appId: org.openfoodfacts.scanner
 - waitForAnimationToEnd
 - assertVisible: ".*"  # assert any content is visible (app launched)
 - waitForAnimationToEnd
+- takeScreenshot: 01_01_launched

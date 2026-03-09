@@ -1112,14 +1112,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.0"
-  mobile_scanner:
-    dependency: transitive
-    description:
-      name: mobile_scanner
-      sha256: f536c5b8cadcf73d764bdce09c94744f06aa832264730f8971b21a60c5666826
-      url: "https://pub.dev"
-    source: hosted
-    version: "6.0.10"
   mobkit_dashed_border:
     dependency: "direct main"
     description:
@@ -1441,13 +1433,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.28.0"
-  scanner_ml_kit:
-    dependency: "direct main"
-    description:
-      path: "../scanner/ml_kit"
-      relative: true
-    source: path
-    version: "1.0.0"
   scanner_shared:
     dependency: "direct main"
     description:
@@ -1463,12 +1448,13 @@ packages:
     source: path
     version: "1.0.0"
   sentry:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
-      name: sentry
-      sha256: e57e57123968b673c8ca19892eecf93113b4811b8e5cd5d165749ca7f7319fdb
-      url: "https://pub.dev"
-    source: hosted
+      path: "packages/dart"
+      ref: "feat/span/native-app-start-v2"
+      resolved-ref: "339c70d145d3670bd8735026a847027a4ea01309"
+      url: "https://github.com/getsentry/sentry-dart.git"
+    source: git
     version: "9.13.0"
   sentry_dart_plugin:
     dependency: "direct dev"

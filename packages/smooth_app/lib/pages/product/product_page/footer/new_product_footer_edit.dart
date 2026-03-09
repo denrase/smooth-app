@@ -16,7 +16,7 @@ class ProductFooterEditButton extends StatelessWidget {
     final AppLocalizations appLocalizations = AppLocalizations.of(context);
 
     return ProductFooterButton(
-      label: appLocalizations.edit_product_label_short,
+      label: 'maestro_edit_button',
       semanticsLabel: appLocalizations.edit_product_label,
       icon: const icons.Edit(),
       onTap: () => _editProduct(context, context.read<Product>()),

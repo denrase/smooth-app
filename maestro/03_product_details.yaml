@@ -1,34 +1,33 @@
 appId: org.openfoodfacts.scanner
 ---
-# Flow 3: Product Details via Deep Link / Barcode
-# Triggers: product.load span (ProductLoaderPage)
-# Expected spans: product.load with barcode attribute
+# Flow 3: Product Details via Deep Link
+# Triggers: product.load span (ProductLoaderPage), TTID/TTFD, HTTP/SVG spans
+# Expected spans: product.load with barcode attribute, SVG download spans
+# Uses openLink to simulate a deep link, which routes through ProductLoaderPage
 
 - launchApp
 - waitForAnimationToEnd
-
-# Navigate to search and look up a known barcode
-- tapOn: "Search"
-- waitForAnimationToEnd
-- inputText: "3017620422003"
-- pressKey: enter
-- waitForAnimationToEnd
-
-# Wait for product to load
 - extendedWaitUntil:
-    visible: "Nutella"
+    visible: "maestro_search_bar"
+    timeout: 10000
+- takeScreenshot: 03_01_home
+
+# Open product via deep link (triggers ProductLoaderPage → product.load span)
+- openLink: "https://world.openfoodfacts.org/product/3017620422003"
+- waitForAnimationToEnd
+
+# Wait for product page to load
+- extendedWaitUntil:
+    visible: "nutella"
     timeout: 15000
+- takeScreenshot: 03_02_product_page
 
-# Tap on the product
-- tapOn: "Nutella"
-- waitForAnimationToEnd
-
-# Scroll through tabs and content
+# Scroll product page to trigger more content loading
 - scroll
 - waitForAnimationToEnd
-- scroll
-- waitForAnimationToEnd
+- takeScreenshot: 03_03_scrolled
 
-# Go back
+# Go back to home
 - back
 - waitForAnimationToEnd
+- takeScreenshot: 03_04_back

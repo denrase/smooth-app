@@ -105,8 +105,8 @@ dependencies:
   scanner_shared:
     path: ../scanner/shared
 
-  scanner_ml_kit:
-    path: ../scanner/ml_kit
+  # scanner_ml_kit: # disabled — MLKit has no arm64 simulator support (Xcode 26)
+  #   path: ../scanner/ml_kit
 
   scanner_zxing:
     path: ../scanner/zxing
@@ -130,6 +130,13 @@ dev_dependencies:
   flutter_lints: 6.0.0
   openfoodfacts_flutter_lints:
     git: https://github.com/openfoodfacts/openfoodfacts_flutter_lints.git
+
+dependency_overrides:
+  sentry:
+    git:
+      url: https://github.com/getsentry/sentry-dart.git
+      ref: feat/span/native-app-start-v2
+      path: packages/dart
 
 # 'flutter pub run flutter_native_splash:create' to update
 flutter_native_splash:

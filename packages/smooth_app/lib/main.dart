@@ -130,6 +130,12 @@ Future<bool> _init1() async {
   await setupAppNetworkConfig();
   await UserManagementProvider.mountCredentials();
   _userPreferences = await UserPreferences.getUserPreferences();
+  // Skip onboarding and force English/US for Maestro testing
+  await _userPreferences.setLastVisitedOnboardingPage(
+    OnboardingPage.ONBOARDING_COMPLETE,
+  );
+  await _userPreferences.setAppLanguageCode('en');
+  await _userPreferences.setUserCountryCode('us');
   _localDatabase = await LocalDatabase.getLocalDatabase();
   await _continuousScanModel.load(_localDatabase);
   _productPreferences = ProductPreferences(

@@ -28,8 +28,8 @@ class HomePageHeaderSearchBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final SmoothColorsThemeExtension theme = context
-        .extension<SmoothColorsThemeExtension>();
+    final SmoothColorsThemeExtension theme =
+        context.extension<SmoothColorsThemeExtension>();
 
     final AppLocalizations localizations = AppLocalizations.of(context);
 
@@ -37,56 +37,53 @@ class HomePageHeaderSearchBar extends StatelessWidget {
       padding: EdgeInsetsDirectional.symmetric(
         horizontal: HomePageFlexibleHeader.CONTENT_PADDING.start,
       ),
-      child: Semantics(
-        button: true,
-        child: Hero(
-          tag: HERO_TAG,
-          child: Material(
-            // ↑ Needed by the Hero Widget
-            type: MaterialType.transparency,
-            child: SizedBox(
-              height: SEARCH_BAR_HEIGHT,
-              child: InkWell(
-                onTap: () => AppNavigator.of(context).push(
-                  AppRoutes.SEARCH(transition: ProductPageTransition.slideUp),
-                  extra: SearchPageExtra(
-                    searchHelper: SearchProductHelper(),
-                    autofocus: true,
-                    heroTag: HERO_TAG,
-                    backButtonType: BackButtonType.minimize,
-                  ),
+      child: Hero(
+        tag: HERO_TAG,
+        child: Material(
+          // ↑ Needed by the Hero Widget
+          type: MaterialType.transparency,
+          child: SizedBox(
+            height: SEARCH_BAR_HEIGHT,
+            child: InkWell(
+              onTap: () => AppNavigator.of(context).push(
+                AppRoutes.SEARCH(transition: ProductPageTransition.slideUp),
+                extra: SearchPageExtra(
+                  searchHelper: SearchProductHelper(),
+                  autofocus: true,
+                  heroTag: HERO_TAG,
+                  backButtonType: BackButtonType.minimize,
                 ),
-                borderRadius: HEADER_BORDER_RADIUS,
-                child: Ink(
-                  decoration: SearchFieldUIHelper.decoration(context),
-                  child: Padding(
-                    padding: const EdgeInsetsDirectional.all(1.0),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsetsDirectional.symmetric(
-                            horizontal: SMALL_SPACE,
-                          ),
-                          child: icons.AppIconTheme(
-                            color: context.lightTheme()
-                                ? theme.primaryBlack
-                                : theme.primaryUltraBlack,
-                            child: const OxFLogosAnimation(),
-                          ),
+              ),
+              borderRadius: HEADER_BORDER_RADIUS,
+              child: Ink(
+                decoration: SearchFieldUIHelper.decoration(context),
+                child: Padding(
+                  padding: const EdgeInsetsDirectional.all(1.0),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsetsDirectional.symmetric(
+                          horizontal: SMALL_SPACE,
                         ),
-                        Expanded(
-                          child: Text(
-                            localizations.homepage_main_card_search_field_hint,
-                            maxLines: 1,
-                            textScaler: TextScaler.noScaling,
-                            overflow: TextOverflow.ellipsis,
-                            style: SearchFieldUIHelper.hintTextStyle,
-                          ),
+                        child: icons.AppIconTheme(
+                          color: context.lightTheme()
+                              ? theme.primaryBlack
+                              : theme.primaryUltraBlack,
+                          child: const OxFLogosAnimation(),
                         ),
-                        const SearchBarIcon(),
-                      ],
-                    ),
+                      ),
+                      Expanded(
+                        child: Text(
+                          localizations.homepage_main_card_search_field_hint,
+                          maxLines: 1,
+                          textScaler: TextScaler.noScaling,
+                          overflow: TextOverflow.ellipsis,
+                          style: SearchFieldUIHelper.hintTextStyle,
+                        ),
+                      ),
+                      const SearchBarIcon(),
+                    ],
                   ),
                 ),
               ),

@@ -1,36 +1,31 @@
 appId: org.openfoodfacts.scanner
 ---
 # Flow 2: Search Product
-# Triggers: product.search span, product.search.decode span, HTTP spans
-# Expected hierarchy: product.search -> product.search.decode
-#                     product.search -> http.client (SentryHttpClient)
+# Triggers: product.search, product.search.decode, HTTP spans
+# All spans fire when search results return — no need to tap into a product.
 
 - launchApp
 - waitForAnimationToEnd
+- extendedWaitUntil:
+    visible: "maestro_search_bar"
+    timeout: 10000
+- takeScreenshot: 02_01_home
 
 # Navigate to search
-- tapOn: "Search"
+- tapOn: "maestro_search_bar"
 - waitForAnimationToEnd
+- takeScreenshot: 02_02_search_page
 
-# Type a search query
+# Type and submit (same sequence that worked in runs 1 & 2)
+- tapOn: "Search"
 - inputText: "nutella"
 - waitForAnimationToEnd
+- takeScreenshot: 02_03_typed_query
 - pressKey: enter
 - waitForAnimationToEnd
 
-# Wait for results to load
+# Wait for results (use "Nutella" — same as the first successful run)
 - extendedWaitUntil:
     visible: "Nutella"
     timeout: 15000
-
-# Tap on a result to trigger product loading
-- tapOn: "Nutella"
-- waitForAnimationToEnd
-
-# Scroll through product details
-- scroll
-- waitForAnimationToEnd
-
-# Go back
-- back
-- waitForAnimationToEnd
+- takeScreenshot: 02_04_search_results

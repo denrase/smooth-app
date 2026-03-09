@@ -122,8 +122,14 @@ class _ScanSearchBar extends StatelessWidget {
     final SmoothColorsThemeExtension theme = context
         .extension<SmoothColorsThemeExtension>();
 
+    // Wrap the entire InkWell in a single Semantics node so Maestro taps the
+    // center of the full 48px search bar instead of the small Text bounds.
+    // Without excludeSemantics the Text child creates its own (smaller) node
+    // whose center, after CarouselSlider offset, lands on the news card below.
     return Semantics(
       button: true,
+      label: 'maestro_search_bar',
+      excludeSemantics: true,
       child: Hero(
         tag: HERO_TAG,
         child: Material(

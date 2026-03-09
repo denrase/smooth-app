@@ -4,34 +4,49 @@ appId: org.openfoodfacts.scanner
 # Triggers: background_task.lifecycle span (startInactiveSpan),
 #           background_task.execute span, Hive db spans
 # Expected hierarchy: background_task.lifecycle -> background_task.execute
+# Prerequisite: flow 01 must run first (clearState)
+#
+# Note: Saving edits requires OpenFoodFacts login. Without login, the save
+# dialog blocks and no background task is created. The flow navigates to the
+# edit page and opens the basic details editor to verify the navigation works.
+# Background task span validation requires manual testing with a logged-in session.
 
 - launchApp
 - waitForAnimationToEnd
-
-# Search for a product
-- tapOn: "Search"
-- waitForAnimationToEnd
-- inputText: "3017620422003"
-- pressKey: enter
-- waitForAnimationToEnd
-
-# Wait and tap on product
 - extendedWaitUntil:
-    visible: "Nutella"
+    visible: "maestro_search_bar"
+    timeout: 10000
+- takeScreenshot: 05_01_home
+
+# Open product via deep link (reuse same approach as flow 03)
+- openLink: "https://world.openfoodfacts.org/product/3017620422003"
+- waitForAnimationToEnd
+
+# Wait for product page to load
+- extendedWaitUntil:
+    visible: "nutella"
     timeout: 15000
-- tapOn: "Nutella"
-- waitForAnimationToEnd
+- takeScreenshot: 05_02_product_page
 
-# Open edit page
-- tapOn: "Edit"
+# Tap the edit button to open the edit page
+# Note: The button shows "maestro_edit_button" visually but has
+# Semantics(label: "Edit product", excludeSemantics: true),
+# so Maestro sees the accessibility label.
+- tapOn: "Edit product"
 - waitForAnimationToEnd
+- takeScreenshot: 05_03_edit_page
 
-# Scroll to see edit options
+# Scroll through the edit options
 - scroll
 - waitForAnimationToEnd
+- takeScreenshot: 05_04_edit_scrolled
 
-# Go back without saving (to avoid modifying real data)
+# Go back to product page
 - back
 - waitForAnimationToEnd
+- takeScreenshot: 05_05_back_to_product
+
+# Go back to home
 - back
 - waitForAnimationToEnd
+- takeScreenshot: 05_06_back_to_home

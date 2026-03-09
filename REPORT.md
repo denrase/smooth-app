@@ -78,7 +78,7 @@ The naming also conflates two concepts: the spec's `active` option controls **sc
 
 Recommendation: promote the base API to `Sentry.startSpan` (matching the spec) and give the callback variant a distinct name (e.g. `Sentry.startSpanWithCallback`), or align with the spec's single `startSpan` + `active` option.
 
-**2. `startSpan` API split (`startSpan` / `startSpanSync`):** All instrumentation used async callbacks — `startSpan` felt natural everywhere. No synchronous spans were needed. Low priority.
+**2. `startSpan` API split (`startSpan` / `startSpanSync`):** Not needed. The current `startSpan` uses `FutureOr<T>` so it already handles both sync and async callbacks in one API — sync callbacks return directly, async callbacks return a Future.
 
 ---
 

@@ -68,7 +68,15 @@ This is a common pattern in UI apps. `startSpan`'s auto-ending callback can't ha
 
 ### Open Questions
 
-**1. `startSpan` — manual ending:** `startInactiveSpan` covers both cases found (fire-and-forget + spans outliving creation context). Promote to `Sentry.startInactiveSpan`. A separate `startSpanManually` is nice-to-have but not blocking.
+**1. `startSpan` — manual ending and naming:**
+
+Two cases needed manual span lifetime control (fire-and-forget + spans outliving creation context). Both were solved with `startInactiveSpan`.
+
+However, per the [Span API spec](https://develop.sentry.dev/sdk/telemetry/spans/span-api/), the **base** `startSpan` MUST return a span and MUST NOT auto-end — that's what the Dart SDK currently calls `startInactiveSpan`. The callback variant that auto-ends is an optional convenience API. The Dart SDK has these inverted: the convenience API got the `startSpan` name, and the spec-mandated base API is internal as `startInactiveSpan`.
+
+The naming also conflates two concepts: the spec's `active` option controls **scope parenting** (whether new spans become children), not auto-ending. `startInactiveSpan` sounds like the span isn't started yet.
+
+Recommendation: promote the base API to `Sentry.startSpan` (matching the spec) and give the callback variant a distinct name (e.g. `Sentry.startSpanWithCallback`), or align with the spec's single `startSpan` + `active` option.
 
 **2. `startSpan` API split (`startSpan` / `startSpanSync`):** All instrumentation used async callbacks — `startSpan` felt natural everywhere. No synchronous spans were needed. Low priority.
 

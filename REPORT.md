@@ -34,7 +34,7 @@ Key files:
 | `startInactiveSpan` documented | ✅ Two real-world use cases found (see below) |
 | API is ergonomic | ✅ See details below |
 
-All span types confirmed in Sentry — auto-instrumented (App Start, HTTP, Hive) and manual (`product.scan`, `product.load`, `product.search`, `product.search.decode`). Only `background_task.execute` was never triggered (Maestro edit flow didn't produce an actual background save).
+All span types confirmed in Sentry — auto-instrumented (App Start, HTTP, Hive) and manual (`product.scan`, `product.load`, `product.search`, `product.search.decode`). `background_task.execute` was not observed — saving edits requires an OpenFoodFacts login which the Maestro flow doesn't have, so no background task is created. `background_task.lifecycle` (via `startInactiveSpan`) was observed.
 
 ---
 

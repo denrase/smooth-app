@@ -10,7 +10,16 @@ Instrumented [openfoodfacts/smooth-app](https://github.com/openfoodfacts/smooth-
 Auto-instrumented: TTID/TTFD, App Starts, Hive (`SentryHive`), HTTP (`SentryHttpClient`).
 Manual spans: `product.scan`, `product.cache_lookup`, `product.fetch`, `product.load`, `product.search`, `product.search.decode`, `background_task.lifecycle`, `background_task.execute`.
 
-5 Maestro flows + a dedicated validation entrypoint for scan/background task paths. See branch for details.
+5 [Maestro flows](https://github.com/denrase/smooth-app/tree/sentry/smooth-app-span-first/maestro) + a dedicated [validation entrypoint](https://github.com/denrase/smooth-app/blob/sentry/smooth-app-span-first/packages/smooth_app/lib/entrypoints/ios/main_ios_scan_validation.dart) for scan/background task paths.
+
+Key files:
+- [`analytics_helper.dart`](https://github.com/denrase/smooth-app/blob/sentry/smooth-app-span-first/packages/smooth_app/lib/helpers/analytics_helper.dart) — SDK init, `beforeSendSpan`, `ignoreSpans`
+- [`continuous_scan_model.dart`](https://github.com/denrase/smooth-app/blob/sentry/smooth-app-span-first/packages/smooth_app/lib/data_models/continuous_scan_model.dart) — `product.scan`, `product.cache_lookup`, `product.fetch`
+- [`product_loader_page.dart`](https://github.com/denrase/smooth-app/blob/sentry/smooth-app-span-first/packages/smooth_app/lib/pages/product/product_loader_page.dart) — `product.load`
+- [`search_products_manager.dart`](https://github.com/denrase/smooth-app/blob/sentry/smooth-app-span-first/packages/smooth_app/lib/query/search_products_manager.dart) — `product.search`, `product.search.decode`
+- [`background_task_manager.dart`](https://github.com/denrase/smooth-app/blob/sentry/smooth-app-span-first/packages/smooth_app/lib/background/background_task_manager.dart) — `background_task.lifecycle`, `background_task.execute`
+- [`local_database.dart`](https://github.com/denrase/smooth-app/blob/sentry/smooth-app-span-first/packages/smooth_app/lib/database/local_database.dart) — `SentryHive.init()`
+- [`network_config.dart`](https://github.com/denrase/smooth-app/blob/sentry/smooth-app-span-first/packages/smooth_app/lib/helpers/network_config.dart) — `SentryHttpClient`
 
 ---
 
@@ -42,7 +51,7 @@ All span types confirmed in Sentry — auto-instrumented (App Start, HTTP, Hive)
 
 **⚠️ `startSpan` callback doesn't work with fire-and-forget patterns**
 
-The app intentionally fire-and-forgets async work to keep the UI responsive:
+The app intentionally fire-and-forgets async work to keep the UI responsive ([`continuous_scan_model.dart`](https://github.com/denrase/smooth-app/blob/sentry/smooth-app-span-first/packages/smooth_app/lib/data_models/continuous_scan_model.dart)):
 
 ```dart
 Sentry.startSpan('product.scan', (span) async {
@@ -53,7 +62,7 @@ Sentry.startSpan('product.scan', (span) async {
 // product.cache_lookup → sometimes nested (timing), product.fetch → orphaned
 ```
 
-This is a common pattern in UI apps. `startSpan`'s auto-ending callback can't handle it — child spans get orphaned. This is a **second real-world case for `startInactiveSpan`** (alongside the `BackgroundTaskManager` pattern where a span outlives its creation context).
+This is a common pattern in UI apps. `startSpan`'s auto-ending callback can't handle it — child spans get orphaned. This is a **second real-world case for `startInactiveSpan`** (alongside the [`BackgroundTaskManager`](https://github.com/denrase/smooth-app/blob/sentry/smooth-app-span-first/packages/smooth_app/lib/background/background_task_manager.dart) pattern where a span outlives its creation context).
 
 ---
 
@@ -68,15 +77,3 @@ This is a common pattern in UI apps. `startSpan`'s auto-ending callback can't ha
 ### Remaining
 
 - [ ] **Android** — physical device, release mode
-
----
-
-### Run Logs
-
-Detailed Maestro run reports and flutter logs are in `maestro/reports/` (gitignored, local only):
-
-- `run_20260309_102328/` — latest full run (all 5 flows)
-  - `flutter_logs.txt` — raw `beforeSendSpan` output
-  - `phase4a_scanning.md` through `phase4f_configure_scope.md` — per-phase validation
-  - `summary.md` — run summary
-- `run_20260309_101851/`, `run_20260309_100821/` — earlier runs

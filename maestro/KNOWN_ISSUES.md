@@ -21,11 +21,16 @@ logged-in session.
 ### `debugPrint` log capture is intermittent
 
 The `beforeSendSpan` callback uses `debugPrint` to log span information.
-The `run_validation.sh` script captures these logs via `xcrun simctl log
-stream`. However, `debugPrint` output is intermittently captured by the
-system log — some runs capture `product.search` spans, others don't. The
-spans are sent to Sentry regardless; this is a log-capture limitation, not
-a span delivery issue. Always verify spans in the Sentry dashboard.
+The validation scripts capture these logs via `xcrun simctl log stream`
+(iOS) or `adb logcat` (Android). However, spans that complete during
+active Maestro interaction (typing, tapping, scrolling) are consistently
+**not** captured in local logs on either platform. Flutter throttles
+`debugPrint` output (~1024 bytes/frame), and during busy UI frames the
+log lines are dropped. Spans that fire during app startup or page
+loading (lower UI activity) are reliably captured.
+
+The spans are sent to Sentry regardless; this is a log-capture limitation,
+not a span delivery issue. Always verify spans in the Sentry dashboard.
 
 ---
 

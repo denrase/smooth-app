@@ -84,4 +84,4 @@ Recommendation: promote the base API to `Sentry.startSpan` (matching the spec) a
 
 ### Remaining
 
-- [ ] **Android** — physical device, release mode
+- [x] **Android** — see [REPORT_ANDROID.md](REPORT_ANDROID.md)

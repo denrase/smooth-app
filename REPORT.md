@@ -1,9 +1,14 @@
-## iOS Validation Report
+## Validation Report
 
 Instrumented [openfoodfacts/smooth-app](https://github.com/openfoodfacts/smooth-app) on branch [`denrase/smooth-app@sentry/smooth-app-span-first`](https://github.com/denrase/smooth-app/tree/sentry/smooth-app-span-first) using SDK branch [`feat/span/native-app-start-v2`](https://github.com/getsentry/sentry-dart/pull/3534).
 
-**Tested on:** iOS Simulator, iPhone 16 Pro, iOS 18.5, debug mode.
 **Sentry Project:** [denrase / smooth-app-span-first](https://sentry.io/organizations/denrase/performance/?project=4510980127784960)
+
+Platform-specific details:
+- [iOS Validation Report](REPORT_IOS.md) — iPhone 16 Pro Simulator, iOS 18.5
+- [Android Validation Report](REPORT_ANDROID.md) — Pixel 4a, Android 13
+
+---
 
 ### Instrumentation
 
@@ -23,18 +28,25 @@ Key files:
 
 ---
 
-### Assertions
+### Cross-Platform Comparison
 
-| Assertion | Result |
-|-----------|--------|
-| `ignoreSpans` and `beforeSendSpan` behave correctly | ✅ `beforeSendSpan` fired for all 21 spans in validation run |
-| No spans unexpectedly dropped by ingest | ✅ Sentry dashboard shows 21 spans — exact match ([trace](https://sentry.io/organizations/denrase/performance/trace/bd800c5ab6094685af3982d73e22510a/)) |
-| Span hierarchies correct | ✅ Parent-child nesting verified in trace view. One exception: `product.fetch` orphaned due to fire-and-forget pattern (see below) |
-| `configureScope` delegates attributes to children | ✅ `span.setAttribute()` works correctly (verified via API + UI). Note: `scope.setTag()` is not part of the span-first API — only `setAttribute` is supported. |
-| `startInactiveSpan` documented | ✅ Two real-world use cases found (see below) |
-| API is ergonomic | ✅ See details below |
+| Aspect | iOS (iPhone 16 Pro Sim) | Android (Pixel 4a physical) |
+|--------|------------------------|---------------------------|
+| **Flows** | 5/5 passed | 5/5 passed |
+| **Total spans (logs)** | 108 | 94 |
+| **Traces** | 7 | 8 |
+| **App start type** | 1 Cold + 4 Warm | 5 Cold (each `launchApp` = cold) |
+| **App start sub-spans** | Pre Runtime Init, UIKit init, Runtime init | Process Initialization, Plugin registration |
+| **Hive DB spans** | ✅ openBox/openLazyBox | ✅ openBox/openLazyBox |
+| **product.search** | ✅ 20.1s | ✅ 27.6s |
+| **product.search.decode** | ✅ 84ms | ✅ 689ms |
+| **product.load** | ✅ 649ms, 636ms | ✅ 1.5s, 2.4s |
+| **HTTP spans** | ✅ auto-instrumented | ✅ auto-instrumented |
+| **TTID/TTFD** | ✅ root /, _product_loader/ | ✅ root /, _product_loader/ |
+| **beforeSendSpan** | ✅ fires for all spans | ✅ fires for all spans |
+| **Sentry API confirmed** | ✅ | ✅ |
 
-All span types confirmed in Sentry — auto-instrumented (App Start, HTTP, Hive) and manual (`product.scan`, `product.load`, `product.search`, `product.search.decode`). `background_task.execute` was not observed — saving edits requires an OpenFoodFacts login which the Maestro flow doesn't have, so no background task is created. `background_task.lifecycle` (via `startInactiveSpan`) was observed.
+**Key difference:** Maestro's `launchApp` on iOS terminates and re-creates the app (Warm Start), while on Android each `launchApp` is a fresh Cold Start. This affects how much wait time is needed between flows for in-flight async operations (like search) to complete.
 
 ---
 
@@ -66,7 +78,7 @@ This is a common pattern in UI apps. `startSpan`'s auto-ending callback can't ha
 
 ---
 
-### Open Questions
+### Conclusions
 
 **1. `startSpan` — manual ending and naming:**
 
@@ -79,9 +91,3 @@ The naming also conflates two concepts: the spec's `active` option controls **sc
 Recommendation: promote the base API to `Sentry.startSpan` (matching the spec) and give the callback variant a distinct name (e.g. `Sentry.startSpanWithCallback`), or align with the spec's single `startSpan` + `active` option.
 
 **2. `startSpan` API split (`startSpan` / `startSpanSync`):** Not needed. The current `startSpan` uses `FutureOr<T>` so it already handles both sync and async callbacks in one API — sync callbacks return directly, async callbacks return a Future.
-
----
-
-### Remaining
-
-- [x] **Android** — see [REPORT_ANDROID.md](REPORT_ANDROID.md)

@@ -14,11 +14,11 @@
 
 ```bash
 # Run all flows with automatic log capture and report generation
-./maestro/run_validation.sh
+./maestro/run_validation_ios.sh
 
 # Run specific flows only
-./maestro/run_validation.sh 02           # just search
-./maestro/run_validation.sh 02 03        # search + product details
+./maestro/run_validation_ios.sh 02           # just search
+./maestro/run_validation_ios.sh 02 03        # search + product details
 ```
 
 The script will:

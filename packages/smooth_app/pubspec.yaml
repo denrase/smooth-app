@@ -112,9 +112,11 @@ dependencies:
     path: ../scanner/zxing
 
 
-  openfoodfacts: 3.30.2
-  # openfoodfacts:
-  #   path: ../../../openfoodfacts-dart
+  # openfoodfacts: 3.30.2
+  openfoodfacts:
+    git:
+      url: https://github.com/denrase/openfoodfacts-dart.git
+      ref: sentry/openfoodfacts-dart-span-first
 
 dev_dependencies:
   sentry_dart_plugin: ^3.2.1

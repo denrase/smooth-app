@@ -16,6 +16,7 @@ late final Client sentryHttpClient;
 Future<void> setupAppNetworkConfig() async {
   await _initUserAgent();
   sentryHttpClient = SentryHttpClient(client: Client());
+  HttpHelper.instance.client = sentryHttpClient;
   return _importSSLCertificate();
 }
 

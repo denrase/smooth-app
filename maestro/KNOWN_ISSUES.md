@@ -70,7 +70,7 @@ runs). On a clean app state (no history), `pressKey: enter` works correctly.
 ### Workaround
 
 **Always run flow 01 (`clearState: true`) before flow 02.** The
-`run_validation.sh` script already runs flows in order (01 → 02 → …), so this
+`run_validation_ios.sh` script already runs flows in order (01 → 02 → …), so this
 is the default behavior. Do not run flow 02 in isolation without first clearing
 app state.
 

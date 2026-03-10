@@ -13,9 +13,9 @@ fi
 # then generates a validation report with auto-checks and Sentry links.
 #
 # Usage:
-#   ./maestro/run_validation.sh                  # run all flows
-#   ./maestro/run_validation.sh 02               # run only flow 02
-#   ./maestro/run_validation.sh 02 03            # run flows 02 and 03
+#   ./maestro/run_validation_ios.sh                  # run all flows
+#   ./maestro/run_validation_ios.sh 02               # run only flow 02
+#   ./maestro/run_validation_ios.sh 02 03            # run flows 02 and 03
 #
 # Prerequisites:
 #   - iOS simulator booted
@@ -25,7 +25,7 @@ fi
 # The script will automatically build and install the app if needed.
 #
 # Output:
-#   reports/run_YYYYMMDD_HHMMSS/
+#   reports/run_ios_YYYYMMDD_HHMMSS/
 #     summary.md              — concise overview with links to phase reports
 #     spans.md                — full captured spans table
 #     phase1_streaming.md     — Phase 1 checks
@@ -46,7 +46,7 @@ SCRIPT_DIR="${0:A:h}"
 PROJECT_DIR="${SCRIPT_DIR:h}"
 TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
 OUTPUT_DIR="$SCRIPT_DIR/reports"
-REPORT_DIR="$OUTPUT_DIR/run_${TIMESTAMP}"
+REPORT_DIR="$OUTPUT_DIR/run_ios_${TIMESTAMP}"
 LOG_FILE="$REPORT_DIR/flutter_logs.txt"
 
 SENTRY_BASE_URL="https://sentry.io/organizations/denrase/performance/trace"
@@ -266,7 +266,7 @@ for flow in "${flows_to_run[@]}"; do
   # Onboarding is skipped in-app (hardcoded in main.dart)
 
   info "Running flow: $flow"
-  if maestro test --device "$SIMULATOR_UDID" "$flow_file" 2>&1 | while IFS= read -r line; do echo "  │ $line"; done; then
+  if maestro test --device "$SIMULATOR_UDID" --test-output-dir "$REPORT_DIR" "$flow_file" 2>&1 | while IFS= read -r line; do echo "  │ $line"; done; then
     FLOW_STATUS[$flow]="passed"
     ok "Flow $flow completed"
   else

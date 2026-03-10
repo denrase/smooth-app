@@ -12,7 +12,8 @@ appId: org.openfoodfacts.scanner
     timeout: 45000
 - takeScreenshot: 03_01_home
 
-# Open product via deep link
+# Open product via deep link (HTTP fetch takes a few seconds in debug mode)
 - openLink: "https://world.openfoodfacts.org/product/3017620422003"
 - waitForAnimationToEnd
+- evalScript: ${sleep(15000)}
 - takeScreenshot: 03_02_deep_link_opened

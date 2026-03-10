@@ -26,15 +26,35 @@ All Sentry packages (`sentry`, `sentry_flutter`, `sentry_hive`) point to the `fe
 
 ## Maestro Automation
 
-Automated UI flows live in `maestro/`. They run against an iOS simulator and capture Sentry span logs for validation.
+Automated UI flows live in `maestro/`. Separate scripts run them against iOS and Android, capturing Sentry span logs for validation.
+
+### iOS
 
 ```bash
 # Run all flows (builds app, clears state, runs 01-05, generates report)
-./maestro/run_validation.sh
+./maestro/run_validation_ios.sh
 
 # Run specific flows
-./maestro/run_validation.sh 02 03
+./maestro/run_validation_ios.sh 02 03
 ```
+
+**Target:** iOS Simulator (iPhone 16 Pro, iOS 18.5, debug mode)
+**Entrypoint:** `lib/entrypoints/ios/main_ios.dart`
+
+### Android
+
+```bash
+# Run all flows (builds app, clears state, runs 01-05, generates report)
+./maestro/run_validation_android.sh
+
+# Run specific flows
+./maestro/run_validation_android.sh 02 03
+```
+
+**Target:** Physical device (Pixel 4a, Android 13, debug mode) via `adb tcpip`
+**Entrypoint:** `lib/entrypoints/android/main_fdroid.dart` (ZXing scanner)
+
+### Flows
 
 **Important:** Flow 01 (`clearState: true`) must run before flows 02/03/05 — see `maestro/KNOWN_ISSUES.md`.
 
@@ -45,11 +65,24 @@ Automated UI flows live in `maestro/`. They run against an iOS simulator and cap
 | `03_product_details` | `product.load`, `product.scan`, `configureScope` |
 | `04_preferences` | Navigation spans, Hive read/write |
 | `05_product_edit` | `background_task.lifecycle`, `background_task.execute` |
+| `06_scan_devmode` | Camera-based scanning (manual only) |
 
-Reports are generated in `maestro/reports/`. See `maestro/VALIDATION_CHECKLIST.md` for the full checklist.
+### Reports
+
+Reports are generated in `maestro/reports/`:
+- iOS runs: `maestro/reports/run_ios_YYYYMMDD_HHMMSS/`
+- Android runs: `maestro/reports/run_android_YYYYMMDD_HHMMSS/`
+
+Each run directory contains: phase reports (markdown), `spans.md`, `summary.md`, `flutter_logs.txt`, and Maestro screenshots.
+
+See `maestro/VALIDATION_CHECKLIST.md` for the full checklist.
 
 ## Key Files
 
 - `maestro/VALIDATION_CHECKLIST.md` — full validation checklist with Sentry links
 - `maestro/KNOWN_ISSUES.md` — Maestro quirks and workarounds
-- `maestro/run_validation.sh` — automated runner with log parsing and report generation
+- `maestro/run_validation_ios.sh` — iOS runner (simulator log capture, report generation)
+- `maestro/run_validation_android.sh` — Android runner (logcat capture, adb tcpip setup, report generation)
+- `REPORT.md` — combined validation report
+- `REPORT_IOS.md` — iOS-specific trace links and observations
+- `REPORT_ANDROID.md` — Android-specific trace links and observations

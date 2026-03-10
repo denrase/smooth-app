@@ -1163,10 +1163,11 @@ packages:
   openfoodfacts:
     dependency: "direct main"
     description:
-      name: openfoodfacts
-      sha256: "51bb760342865523a207d1df72e0a022d131a10a9ea0b5b663ed7be93837c561"
-      url: "https://pub.dev"
-    source: hosted
+      path: "."
+      ref: "sentry/openfoodfacts-dart-span-first"
+      resolved-ref: "6c1e1ebb9098e64b6e7d1cffbda10d852e6a6fb5"
+      url: "https://github.com/denrase/openfoodfacts-dart.git"
+    source: git
     version: "3.30.2"
   openfoodfacts_flutter_lints:
     dependency: "direct dev"

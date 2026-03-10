@@ -280,7 +280,7 @@ for flow in "${flows_to_run[@]}"; do
   fi
 
   info "Running flow: $flow"
-  if maestro test --device "$MAESTRO_DEVICE_ID" "$flow_file" 2>&1 | while IFS= read -r line; do echo "  │ $line"; done; then
+  if maestro test --device "$MAESTRO_DEVICE_ID" --test-output-dir "$REPORT_DIR" "$flow_file" 2>&1 | while IFS= read -r line; do echo "  │ $line"; done; then
     FLOW_STATUS[$flow]="passed"
     ok "Flow $flow completed"
   else

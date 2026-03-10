@@ -30,3 +30,7 @@ appId: org.openfoodfacts.scanner
 - pressKey: enter
 - waitForAnimationToEnd
 - takeScreenshot: 02_03_search_submitted
+
+# Wait for search results to load (API is slow in debug mode: ~20-40s)
+- evalScript: ${sleep(45000)}
+- takeScreenshot: 02_04_search_results

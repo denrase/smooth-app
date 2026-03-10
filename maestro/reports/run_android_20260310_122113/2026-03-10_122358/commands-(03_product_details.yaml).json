@@ -1,0 +1,219 @@
+[ {
+  "command" : {
+    "openLinkCommand" : {
+      "link" : "https://world.openfoodfacts.org/product/3017620422003",
+      "autoVerify" : false,
+      "browser" : false,
+      "optional" : false
+    }
+  },
+  "metadata" : {
+    "status" : "COMPLETED",
+    "timestamp" : 1773141857625,
+    "duration" : 1503,
+    "sequenceNumber" : 6,
+    "evaluatedCommand" : {
+      "openLinkCommand" : {
+        "link" : "https://world.openfoodfacts.org/product/3017620422003",
+        "autoVerify" : false,
+        "browser" : false,
+        "optional" : false
+      }
+    }
+  }
+}, {
+  "command" : {
+    "takeScreenshotCommand" : {
+      "path" : "03_01_home",
+      "optional" : false
+    }
+  },
+  "metadata" : {
+    "status" : "COMPLETED",
+    "timestamp" : 1773141857201,
+    "duration" : 424,
+    "sequenceNumber" : 5,
+    "evaluatedCommand" : {
+      "takeScreenshotCommand" : {
+        "path" : "03_01_home",
+        "optional" : false
+      }
+    }
+  }
+}, {
+  "command" : {
+    "waitForAnimationToEndCommand" : {
+      "optional" : false
+    }
+  },
+  "metadata" : {
+    "status" : "COMPLETED",
+    "timestamp" : 1773141847237,
+    "duration" : 2944,
+    "sequenceNumber" : 3,
+    "evaluatedCommand" : {
+      "waitForAnimationToEndCommand" : {
+        "optional" : false
+      }
+    }
+  }
+}, {
+  "command" : {
+    "assertConditionCommand" : {
+      "condition" : {
+        "visible" : {
+          "textRegex" : "maestro_search_bar",
+          "optional" : false
+        }
+      },
+      "timeout" : "45000",
+      "optional" : false
+    }
+  },
+  "metadata" : {
+    "status" : "COMPLETED",
+    "timestamp" : 1773141850181,
+    "duration" : 7019,
+    "sequenceNumber" : 4,
+    "evaluatedCommand" : {
+      "assertConditionCommand" : {
+        "condition" : {
+          "visible" : {
+            "textRegex" : "maestro_search_bar",
+            "optional" : false
+          }
+        },
+        "timeout" : "45000",
+        "optional" : false
+      }
+    }
+  }
+}, {
+  "command" : {
+    "runScriptCommand" : {
+      "script" : "// Busy-wait for 15 seconds to allow deep link product page to load.\n// Maestro 2.2.0 removed the built-in sleep() function from evalScript.\nvar end = Date.now() + 15000;\nwhile (Date.now() < end) {}\noutput.result = \"waited 15s\";\n",
+      "sourceDescription" : "/Users/denis/Repos/repros/smooth-app/maestro/scripts/wait_15s.js",
+      "optional" : false
+    }
+  },
+  "metadata" : {
+    "status" : "COMPLETED",
+    "timestamp" : 1773141860437,
+    "duration" : 15454,
+    "sequenceNumber" : 8,
+    "evaluatedCommand" : {
+      "runScriptCommand" : {
+        "script" : "// Busy-wait for 15 seconds to allow deep link product page to load.\n// Maestro 2.2.0 removed the built-in sleep() function from evalScript.\nvar end = Date.now() + 15000;\nwhile (Date.now() < end) {}\noutput.result = \"waited 15s\";\n",
+        "sourceDescription" : "/Users/denis/Repos/repros/smooth-app/maestro/scripts/wait_15s.js",
+        "optional" : false
+      }
+    }
+  }
+}, {
+  "command" : {
+    "waitForAnimationToEndCommand" : {
+      "optional" : false
+    }
+  },
+  "metadata" : {
+    "status" : "COMPLETED",
+    "timestamp" : 1773141859129,
+    "duration" : 1308,
+    "sequenceNumber" : 7,
+    "evaluatedCommand" : {
+      "waitForAnimationToEndCommand" : {
+        "optional" : false
+      }
+    }
+  }
+}, {
+  "command" : {
+    "takeScreenshotCommand" : {
+      "path" : "03_02_deep_link_opened",
+      "optional" : false
+    }
+  },
+  "metadata" : {
+    "status" : "COMPLETED",
+    "timestamp" : 1773141875891,
+    "duration" : 490,
+    "sequenceNumber" : 9,
+    "evaluatedCommand" : {
+      "takeScreenshotCommand" : {
+        "path" : "03_02_deep_link_opened",
+        "optional" : false
+      }
+    }
+  }
+}, {
+  "command" : {
+    "applyConfigurationCommand" : {
+      "config" : {
+        "appId" : "org.openfoodfacts.scanner"
+      },
+      "optional" : false
+    }
+  },
+  "metadata" : {
+    "status" : "COMPLETED",
+    "timestamp" : 1773141840869,
+    "duration" : 2,
+    "sequenceNumber" : 1,
+    "evaluatedCommand" : {
+      "applyConfigurationCommand" : {
+        "config" : {
+          "appId" : "org.openfoodfacts.scanner"
+        },
+        "optional" : false
+      }
+    }
+  }
+}, {
+  "command" : {
+    "launchAppCommand" : {
+      "appId" : "org.openfoodfacts.scanner",
+      "optional" : false
+    }
+  },
+  "metadata" : {
+    "status" : "COMPLETED",
+    "timestamp" : 1773141840871,
+    "duration" : 6365,
+    "sequenceNumber" : 2,
+    "evaluatedCommand" : {
+      "launchAppCommand" : {
+        "appId" : "org.openfoodfacts.scanner",
+        "optional" : false
+      }
+    }
+  }
+}, {
+  "command" : {
+    "defineVariablesCommand" : {
+      "env" : {
+        "MAESTRO_FILENAME" : "03_product_details",
+        "MAESTRO_DEVICE_UDID" : "0B041JEC215691",
+        "MAESTRO_SHARD_ID" : "1",
+        "MAESTRO_SHARD_INDEX" : "0"
+      },
+      "optional" : false
+    }
+  },
+  "metadata" : {
+    "status" : "COMPLETED",
+    "timestamp" : 1773141840865,
+    "duration" : 4,
+    "sequenceNumber" : 0,
+    "evaluatedCommand" : {
+      "defineVariablesCommand" : {
+        "env" : {
+          "MAESTRO_FILENAME" : "03_product_details",
+          "MAESTRO_DEVICE_UDID" : "0B041JEC215691",
+          "MAESTRO_SHARD_ID" : "1",
+          "MAESTRO_SHARD_INDEX" : "0"
+        },
+        "optional" : false
+      }
+    }
+  }
+} ]

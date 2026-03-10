@@ -1,0 +1,203 @@
+--------- beginning of main
+03-10 11:21:31.770  6080  6080 I flutter : [IMPORTANT:flutter/shell/common/shell.cc(528)] [Action Required]: Impeller opt-out deprecated.
+03-10 11:21:31.770  6080  6080 I flutter :     The application opted out of Impeller by either using the
+03-10 11:21:31.770  6080  6080 I flutter :     `--no-enable-impeller` flag or the
+03-10 11:21:31.770  6080  6080 I flutter :     `io.flutter.embedding.android.EnableImpeller` `AndroidManifest.xml` entry.
+03-10 11:21:31.770  6080  6080 I flutter :     These options are going to go away in an upcoming Flutter release. Remove
+03-10 11:21:31.770  6080  6080 I flutter :     the explicit opt-out. If you need to opt-out, please report a bug describing
+03-10 11:21:31.770  6080  6080 I flutter :     the issue.
+03-10 11:21:31.770  6080  6080 I flutter : 
+03-10 11:21:31.770  6080  6080 I flutter :     https://github.com/flutter/flutter/issues/new?template=02_bug.yml
+03-10 11:21:31.770  6080  6080 I flutter : 
+03-10 11:21:31.909  6080  6123 I flutter : The Dart VM service is listening on http://127.0.0.1:42529/lqlBsQVi_YE=/
+03-10 11:21:33.825  6080  6080 I flutter : 2026-03-10T11:21:33.823359	I	      SmoothService:	 New app session started
+03-10 11:21:34.691  6080  6080 I flutter : [SentrySpanFirst] Span: openLazyBox (SentrySpanStatusV2.ok) trace=be27b02320c84274924ce1398e55234a span=e5b3df49a5e04ee2
+03-10 11:21:34.728  6080  6080 I flutter : [SentrySpanFirst] Span: openLazyBox (SentrySpanStatusV2.ok) trace=be27b02320c84274924ce1398e55234a span=00002980a6e94c9a
+03-10 11:21:34.746  6080  6080 I flutter : [SentrySpanFirst] Span: openBox (SentrySpanStatusV2.ok) trace=be27b02320c84274924ce1398e55234a span=7c1e1867f58b4b5d
+03-10 11:21:34.754  6080  6080 I flutter : [SentrySpanFirst] Span: openLazyBox (SentrySpanStatusV2.ok) trace=be27b02320c84274924ce1398e55234a span=4511c7100a644314
+03-10 11:21:34.763  6080  6080 I flutter : [SentrySpanFirst] Span: openBox (SentrySpanStatusV2.ok) trace=be27b02320c84274924ce1398e55234a span=5744de2893d34b3e
+03-10 11:21:34.771  6080  6080 I flutter : [SentrySpanFirst] Span: openBox (SentrySpanStatusV2.ok) trace=be27b02320c84274924ce1398e55234a span=c79234c2932944c6
+03-10 11:21:34.782  6080  6080 I flutter : [SentrySpanFirst] Span: openBox (SentrySpanStatusV2.ok) trace=be27b02320c84274924ce1398e55234a span=835e685a88534869
+03-10 11:21:34.793  6080  6080 I flutter : [SentrySpanFirst] Span: openBox (SentrySpanStatusV2.ok) trace=be27b02320c84274924ce1398e55234a span=ea995886971742e3
+03-10 11:21:34.804  6080  6080 I flutter : [SentrySpanFirst] Span: openBox (SentrySpanStatusV2.ok) trace=be27b02320c84274924ce1398e55234a span=bd0989a407cd4b61
+03-10 11:21:39.381  6080  6080 I flutter : [SentrySpanFirst] Span: root / (SentrySpanStatusV2.ok) trace=be27b02320c84274924ce1398e55234a span=18ff9903cc754200
+03-10 11:21:39.879  6080  6080 I flutter : [SentrySpanFirst] Span: root / initial display (SentrySpanStatusV2.ok) trace=be27b02320c84274924ce1398e55234a span=340d39ff1ff84bba
+03-10 11:21:39.879  6080  6080 I flutter : [SentrySpanFirst] Span: Process Initialization (SentrySpanStatusV2.ok) trace=be27b02320c84274924ce1398e55234a span=45cbe7def331422e
+03-10 11:21:39.879  6080  6080 I flutter : [SentrySpanFirst] Span: App start to plugin registration (SentrySpanStatusV2.ok) trace=be27b02320c84274924ce1398e55234a span=aa7359e10ac54aa5
+03-10 11:21:39.879  6080  6080 I flutter : [SentrySpanFirst] Span: Before Sentry Init Setup (SentrySpanStatusV2.ok) trace=be27b02320c84274924ce1398e55234a span=071c377b9ea34830
+03-10 11:21:39.879  6080  6080 I flutter : [SentrySpanFirst] Span: First frame render (SentrySpanStatusV2.ok) trace=be27b02320c84274924ce1398e55234a span=ea384c8377464dd4
+03-10 11:21:39.879  6080  6080 I flutter : [SentrySpanFirst] Span: Cold Start (SentrySpanStatusV2.ok) trace=be27b02320c84274924ce1398e55234a span=384c90e184ed46aa
+03-10 11:21:40.229  6080  6080 I flutter : 2026-03-10T11:21:40.229714	D	PermissionListener:	 New permission value: DevicePermission{permission: Permission.camera, status: DevicePermissionStatus.granted}
+03-10 11:21:41.048  6080  6080 I flutter : 2026-03-10T11:21:41.048424	I	      AppNewsProvider:	 News loaded
+03-10 11:21:41.049  6080  6080 I flutter : 2026-03-10T11:21:41.049752	I	      AppNewsProvider:	 News loaded
+03-10 11:22:06.030  6458  6458 I flutter : [IMPORTANT:flutter/shell/common/shell.cc(528)] [Action Required]: Impeller opt-out deprecated.
+03-10 11:22:06.030  6458  6458 I flutter :     The application opted out of Impeller by either using the
+03-10 11:22:06.030  6458  6458 I flutter :     `--no-enable-impeller` flag or the
+03-10 11:22:06.030  6458  6458 I flutter :     `io.flutter.embedding.android.EnableImpeller` `AndroidManifest.xml` entry.
+03-10 11:22:06.030  6458  6458 I flutter :     These options are going to go away in an upcoming Flutter release. Remove
+03-10 11:22:06.030  6458  6458 I flutter :     the explicit opt-out. If you need to opt-out, please report a bug describing
+03-10 11:22:06.030  6458  6458 I flutter :     the issue.
+03-10 11:22:06.030  6458  6458 I flutter : 
+03-10 11:22:06.030  6458  6458 I flutter :     https://github.com/flutter/flutter/issues/new?template=02_bug.yml
+03-10 11:22:06.030  6458  6458 I flutter : 
+03-10 11:22:06.167  6458  6502 I flutter : The Dart VM service is listening on http://127.0.0.1:39647/SskdCjmmrQA=/
+03-10 11:22:08.015  6458  6458 I flutter : 2026-03-10T11:22:08.012950	I	      SmoothService:	 New app session started
+03-10 11:22:08.408  6458  6458 I flutter : [SentrySpanFirst] Span: openLazyBox (SentrySpanStatusV2.ok) trace=8286272670624e9dabb06cbf3025ff7b span=f0e541c4b0274a5a
+03-10 11:22:08.444  6458  6458 I flutter : [SentrySpanFirst] Span: openLazyBox (SentrySpanStatusV2.ok) trace=8286272670624e9dabb06cbf3025ff7b span=27827789682644a1
+03-10 11:22:08.461  6458  6458 I flutter : [SentrySpanFirst] Span: openBox (SentrySpanStatusV2.ok) trace=8286272670624e9dabb06cbf3025ff7b span=6b23d847783a4228
+03-10 11:22:08.476  6458  6458 I flutter : [SentrySpanFirst] Span: openLazyBox (SentrySpanStatusV2.ok) trace=8286272670624e9dabb06cbf3025ff7b span=69b59cb94310477b
+03-10 11:22:08.484  6458  6458 I flutter : [SentrySpanFirst] Span: openBox (SentrySpanStatusV2.ok) trace=8286272670624e9dabb06cbf3025ff7b span=bdc7cdf0019242c1
+03-10 11:22:08.492  6458  6458 I flutter : [SentrySpanFirst] Span: openBox (SentrySpanStatusV2.ok) trace=8286272670624e9dabb06cbf3025ff7b span=4f68e82a7e784d4a
+03-10 11:22:08.501  6458  6458 I flutter : [SentrySpanFirst] Span: openBox (SentrySpanStatusV2.ok) trace=8286272670624e9dabb06cbf3025ff7b span=f3f8a9d01d3e4408
+03-10 11:22:08.515  6458  6458 I flutter : [SentrySpanFirst] Span: openBox (SentrySpanStatusV2.ok) trace=8286272670624e9dabb06cbf3025ff7b span=a0ed3503ef294101
+03-10 11:22:08.523  6458  6458 I flutter : [SentrySpanFirst] Span: openBox (SentrySpanStatusV2.ok) trace=8286272670624e9dabb06cbf3025ff7b span=5c0aefdbe8db4ea5
+03-10 11:22:12.956  6458  6458 I flutter : [SentrySpanFirst] Span: root / (SentrySpanStatusV2.ok) trace=8286272670624e9dabb06cbf3025ff7b span=74cc37d5e1a44730
+03-10 11:22:13.839  6458  6458 I flutter : [SentrySpanFirst] Span: root / initial display (SentrySpanStatusV2.ok) trace=8286272670624e9dabb06cbf3025ff7b span=bb41826d122b4199
+03-10 11:22:13.839  6458  6458 I flutter : [SentrySpanFirst] Span: Process Initialization (SentrySpanStatusV2.ok) trace=8286272670624e9dabb06cbf3025ff7b span=8a5c73a7d6f44fd9
+03-10 11:22:13.839  6458  6458 I flutter : [SentrySpanFirst] Span: App start to plugin registration (SentrySpanStatusV2.ok) trace=8286272670624e9dabb06cbf3025ff7b span=6211cc890ae34694
+03-10 11:22:13.839  6458  6458 I flutter : [SentrySpanFirst] Span: Before Sentry Init Setup (SentrySpanStatusV2.ok) trace=8286272670624e9dabb06cbf3025ff7b span=79bd17d996b24376
+03-10 11:22:13.839  6458  6458 I flutter : [SentrySpanFirst] Span: First frame render (SentrySpanStatusV2.ok) trace=8286272670624e9dabb06cbf3025ff7b span=91a0490305bd4def
+03-10 11:22:13.840  6458  6458 I flutter : [SentrySpanFirst] Span: Cold Start (SentrySpanStatusV2.ok) trace=8286272670624e9dabb06cbf3025ff7b span=9ccb41eee2844bc3
+03-10 11:22:13.868  6458  6458 I flutter : 2026-03-10T11:22:13.868721	I	      AppNewsProvider:	 News loaded
+03-10 11:22:13.869  6458  6458 I flutter : 2026-03-10T11:22:13.869466	I	      AppNewsProvider:	 News loaded
+03-10 11:22:14.722  6458  6458 I flutter : 2026-03-10T11:22:14.722461	D	PermissionListener:	 New permission value: DevicePermission{permission: Permission.camera, status: DevicePermissionStatus.granted}
+03-10 11:23:06.249  6458  6458 I flutter : [SentrySpanFirst] Span: POST https://world.openfoodfacts.org/cgi/search.pl (SentrySpanStatusV2.ok) trace=8286272670624e9dabb06cbf3025ff7b span=32afa4eff1cf4483
+03-10 11:23:08.164  6458  6458 I flutter : [SentrySpanFirst] Span: product.search.decode (SentrySpanStatusV2.ok) trace=8286272670624e9dabb06cbf3025ff7b span=f9a82ce16e67450e
+03-10 11:23:08.164  6458  6458 I flutter : [SentrySpanFirst] Span: product.search (SentrySpanStatusV2.ok) trace=8286272670624e9dabb06cbf3025ff7b span=a1e071fbb25f44a0
+03-10 11:23:09.318  6458  6458 I flutter : unhandled element <sodipodi:namedview/>; Picture key: Svg loader
+03-10 11:24:07.821  7051  7051 I flutter : [IMPORTANT:flutter/shell/common/shell.cc(528)] [Action Required]: Impeller opt-out deprecated.
+03-10 11:24:07.821  7051  7051 I flutter :     The application opted out of Impeller by either using the
+03-10 11:24:07.821  7051  7051 I flutter :     `--no-enable-impeller` flag or the
+03-10 11:24:07.821  7051  7051 I flutter :     `io.flutter.embedding.android.EnableImpeller` `AndroidManifest.xml` entry.
+03-10 11:24:07.821  7051  7051 I flutter :     These options are going to go away in an upcoming Flutter release. Remove
+03-10 11:24:07.821  7051  7051 I flutter :     the explicit opt-out. If you need to opt-out, please report a bug describing
+03-10 11:24:07.821  7051  7051 I flutter :     the issue.
+03-10 11:24:07.821  7051  7051 I flutter : 
+03-10 11:24:07.821  7051  7051 I flutter :     https://github.com/flutter/flutter/issues/new?template=02_bug.yml
+03-10 11:24:07.821  7051  7051 I flutter : 
+03-10 11:24:07.999  7051  7089 I flutter : The Dart VM service is listening on http://127.0.0.1:39483/W1pSjQWLFwg=/
+03-10 11:24:09.844  7051  7051 I flutter : 2026-03-10T11:24:09.842126	I	      SmoothService:	 New app session started
+03-10 11:24:10.231  7051  7051 I flutter : [SentrySpanFirst] Span: openLazyBox (SentrySpanStatusV2.ok) trace=4bc777a830c9436f927d8e18676a0d79 span=4cc49281b7c94db5
+03-10 11:24:10.275  7051  7051 I flutter : [SentrySpanFirst] Span: openLazyBox (SentrySpanStatusV2.ok) trace=4bc777a830c9436f927d8e18676a0d79 span=70651517f90d4072
+03-10 11:24:10.292  7051  7051 I flutter : [SentrySpanFirst] Span: openBox (SentrySpanStatusV2.ok) trace=4bc777a830c9436f927d8e18676a0d79 span=71217625115d4732
+03-10 11:24:10.299  7051  7051 I flutter : [SentrySpanFirst] Span: openLazyBox (SentrySpanStatusV2.ok) trace=4bc777a830c9436f927d8e18676a0d79 span=d79b79ff337346c2
+03-10 11:24:10.309  7051  7051 I flutter : [SentrySpanFirst] Span: openBox (SentrySpanStatusV2.ok) trace=4bc777a830c9436f927d8e18676a0d79 span=23411a574f1b4046
+03-10 11:24:10.320  7051  7051 I flutter : [SentrySpanFirst] Span: openBox (SentrySpanStatusV2.ok) trace=4bc777a830c9436f927d8e18676a0d79 span=31ef8a139f824149
+03-10 11:24:10.330  7051  7051 I flutter : [SentrySpanFirst] Span: openBox (SentrySpanStatusV2.ok) trace=4bc777a830c9436f927d8e18676a0d79 span=d36e5e55cc6d45b5
+03-10 11:24:10.343  7051  7051 I flutter : [SentrySpanFirst] Span: openBox (SentrySpanStatusV2.ok) trace=4bc777a830c9436f927d8e18676a0d79 span=2f810dd8a38b4a40
+03-10 11:24:10.350  7051  7051 I flutter : [SentrySpanFirst] Span: openBox (SentrySpanStatusV2.ok) trace=4bc777a830c9436f927d8e18676a0d79 span=2a7e040f8c954cee
+03-10 11:24:14.724  7051  7051 I flutter : [SentrySpanFirst] Span: root / (SentrySpanStatusV2.ok) trace=4bc777a830c9436f927d8e18676a0d79 span=c39d93d745744e63
+03-10 11:24:15.588  7051  7051 I flutter : [SentrySpanFirst] Span: root / initial display (SentrySpanStatusV2.ok) trace=4bc777a830c9436f927d8e18676a0d79 span=5a4e41e3eb774e55
+03-10 11:24:15.588  7051  7051 I flutter : [SentrySpanFirst] Span: Process Initialization (SentrySpanStatusV2.ok) trace=4bc777a830c9436f927d8e18676a0d79 span=bf24708058bd4ca1
+03-10 11:24:15.589  7051  7051 I flutter : [SentrySpanFirst] Span: App start to plugin registration (SentrySpanStatusV2.ok) trace=4bc777a830c9436f927d8e18676a0d79 span=7d396436aa0047e9
+03-10 11:24:15.589  7051  7051 I flutter : [SentrySpanFirst] Span: Before Sentry Init Setup (SentrySpanStatusV2.ok) trace=4bc777a830c9436f927d8e18676a0d79 span=89dd6ce9c01942da
+03-10 11:24:15.589  7051  7051 I flutter : [SentrySpanFirst] Span: First frame render (SentrySpanStatusV2.ok) trace=4bc777a830c9436f927d8e18676a0d79 span=8b119a0c35954d89
+03-10 11:24:15.589  7051  7051 I flutter : [SentrySpanFirst] Span: Cold Start (SentrySpanStatusV2.ok) trace=4bc777a830c9436f927d8e18676a0d79 span=2874e29a824e4220
+03-10 11:24:15.613  7051  7051 I flutter : 2026-03-10T11:24:15.613385	I	      AppNewsProvider:	 News loaded
+03-10 11:24:15.614  7051  7051 I flutter : 2026-03-10T11:24:15.614386	I	      AppNewsProvider:	 News loaded
+03-10 11:24:16.408  7051  7051 I flutter : 2026-03-10T11:24:16.408500	D	PermissionListener:	 New permission value: DevicePermission{permission: Permission.camera, status: DevicePermissionStatus.granted}
+03-10 11:24:18.122  7051  7051 I flutter : [SentrySpanFirst] Span: _product_loader/:productId initial display (SentrySpanStatusV2.ok) trace=2f9975e8d9494329adc32943017e4f12 span=66fda38f6f784334
+03-10 11:24:18.664  7051  7051 I flutter : [SentrySpanFirst] Span: GET https://world.openfoodfacts.org/api/v3/product/3017620422003/ (SentrySpanStatusV2.ok) trace=2f9975e8d9494329adc32943017e4f12 span=31e18ea09ede4793
+03-10 11:24:19.069  7051  7051 I flutter : [SentrySpanFirst] Span: product.load (SentrySpanStatusV2.ok) trace=2f9975e8d9494329adc32943017e4f12 span=d3ce865a35134bb3
+03-10 11:24:19.225  7051  7051 I flutter : 2026-03-10T11:24:19.224857	E	      KnowledgePanelsBuilder:	 Unexpected empty panel data for product "3017620422003" and panelId "prices_card"
+03-10 11:24:19.228  7051  7051 I flutter : 2026-03-10T11:24:19.227879	E	      KnowledgePanelsBuilder:	 Unexpected empty panel data for product "3017620422003" and panelId "folksonomy_card"
+03-10 11:24:20.251  7051  7051 I flutter : 2026-03-10T11:24:20.251180	E	      KnowledgePanelsBuilder:	 Unexpected empty panel data for product "3017620422003" and panelId "prices_card"
+03-10 11:24:20.252  7051  7051 I flutter : 2026-03-10T11:24:20.251953	E	      KnowledgePanelsBuilder:	 Unexpected empty panel data for product "3017620422003" and panelId "folksonomy_card"
+03-10 11:24:20.335  7051  7051 I flutter : unhandled element <sodipodi:namedview/>; Picture key: Svg loader
+03-10 11:24:21.150  7051  7051 I flutter : [SentrySpanFirst] Span: GET https://static.openfoodfacts.org/images/attributes/dist/green-score-unknown.svg (SentrySpanStatusV2.ok) trace=2f9975e8d9494329adc32943017e4f12 span=cc2f32bec48a4def
+03-10 11:24:21.163  7051  7051 I flutter : [SentrySpanFirst] Span: GET https://robotoff.openfoodfacts.org/api/v1/questions/3017620422003 (SentrySpanStatusV2.ok) trace=2f9975e8d9494329adc32943017e4f12 span=b927c338e1ae4660
+03-10 11:24:21.232  7051  7051 I flutter : [SentrySpanFirst] Span: GET https://api.folksonomy.openfoodfacts.org/product/3017620422003 (SentrySpanStatusV2.ok) trace=2f9975e8d9494329adc32943017e4f12 span=fac97bc126ea4202
+03-10 11:24:21.239  7051  7051 I flutter : [SentrySpanFirst] Span: GET https://static.openfoodfacts.org/images/attributes/dist/nutriscore-e-new-en.svg (SentrySpanStatusV2.ok) trace=2f9975e8d9494329adc32943017e4f12 span=909b05113b764aa5
+03-10 11:24:21.244  7051  7051 I flutter : [SentrySpanFirst] Span: GET https://static.openfoodfacts.org/images/attributes/dist/green-score-unknown.svg (SentrySpanStatusV2.ok) trace=2f9975e8d9494329adc32943017e4f12 span=eb1632c24d9643a3
+03-10 11:24:21.250  7051  7051 I flutter : [SentrySpanFirst] Span: GET https://api.folksonomy.openfoodfacts.org/product/3017620422003 (SentrySpanStatusV2.ok) trace=2f9975e8d9494329adc32943017e4f12 span=6374228f21834fa4
+03-10 11:24:21.258  7051  7051 I flutter : [SentrySpanFirst] Span: GET https://api.folksonomy.openfoodfacts.org/product/3017620422003 (SentrySpanStatusV2.ok) trace=2f9975e8d9494329adc32943017e4f12 span=86b8fac1cc984379
+03-10 11:24:21.265  7051  7051 I flutter : [SentrySpanFirst] Span: GET https://static.openfoodfacts.org/images/attributes/dist/nutriscore-e-new-en.svg (SentrySpanStatusV2.ok) trace=2f9975e8d9494329adc32943017e4f12 span=db9ae4fad1ef41fc
+03-10 11:24:21.305  7051  7051 I flutter : 2026-03-10T11:24:21.304999	E	      KnowledgePanelsBuilder:	 Unexpected empty panel data for product "3017620422003" and panelId "prices_card"
+03-10 11:24:21.305  7051  7051 I flutter : 2026-03-10T11:24:21.305874	E	      KnowledgePanelsBuilder:	 Unexpected empty panel data for product "3017620422003" and panelId "folksonomy_card"
+03-10 11:24:21.604  7051  7051 I flutter : [SentrySpanFirst] Span: GET https://prices.openfoodfacts.org/api/v1/prices (SentrySpanStatusV2.ok) trace=2f9975e8d9494329adc32943017e4f12 span=c0ecb97fdd7a4e9f
+03-10 11:24:21.608  7051  7051 I flutter : [SentrySpanFirst] Span: GET https://prices.openfoodfacts.org/api/v1/prices (SentrySpanStatusV2.ok) trace=2f9975e8d9494329adc32943017e4f12 span=573b35046d924f54
+03-10 11:24:21.714  7051  7051 I flutter : [SentrySpanFirst] Span: GET https://api.folksonomy.openfoodfacts.org/product/3017620422003 (SentrySpanStatusV2.ok) trace=2f9975e8d9494329adc32943017e4f12 span=4aefc58ee20c4280
+03-10 11:24:22.319  7051  7051 I flutter : [SentrySpanFirst] Span: GET https://prices.openfoodfacts.org/api/v1/prices (SentrySpanStatusV2.ok) trace=2f9975e8d9494329adc32943017e4f12 span=3999beec5c5744ef
+03-10 11:24:25.322  7051  7051 I flutter : [SentrySpanFirst] Span: _product_loader/:productId (SentrySpanStatusV2.ok) trace=2f9975e8d9494329adc32943017e4f12 span=767b43abf80a425d
+03-10 11:25:06.924  7553  7553 I flutter : [IMPORTANT:flutter/shell/common/shell.cc(528)] [Action Required]: Impeller opt-out deprecated.
+03-10 11:25:06.924  7553  7553 I flutter :     The application opted out of Impeller by either using the
+03-10 11:25:06.924  7553  7553 I flutter :     `--no-enable-impeller` flag or the
+03-10 11:25:06.924  7553  7553 I flutter :     `io.flutter.embedding.android.EnableImpeller` `AndroidManifest.xml` entry.
+03-10 11:25:06.924  7553  7553 I flutter :     These options are going to go away in an upcoming Flutter release. Remove
+03-10 11:25:06.924  7553  7553 I flutter :     the explicit opt-out. If you need to opt-out, please report a bug describing
+03-10 11:25:06.924  7553  7553 I flutter :     the issue.
+03-10 11:25:06.924  7553  7553 I flutter : 
+03-10 11:25:06.924  7553  7553 I flutter :     https://github.com/flutter/flutter/issues/new?template=02_bug.yml
+03-10 11:25:06.924  7553  7553 I flutter : 
+03-10 11:25:07.105  7553  7596 I flutter : The Dart VM service is listening on http://127.0.0.1:39171/rzzeQMDU5Ks=/
+03-10 11:25:09.007  7553  7553 I flutter : 2026-03-10T11:25:09.004742	I	      SmoothService:	 New app session started
+03-10 11:25:09.399  7553  7553 I flutter : [SentrySpanFirst] Span: openLazyBox (SentrySpanStatusV2.ok) trace=641eea67e5684fe5bf97bbb58ccb9412 span=c0cf47f0b5f740e9
+03-10 11:25:09.444  7553  7553 I flutter : [SentrySpanFirst] Span: openLazyBox (SentrySpanStatusV2.ok) trace=641eea67e5684fe5bf97bbb58ccb9412 span=204ed8cd41284476
+03-10 11:25:09.461  7553  7553 I flutter : [SentrySpanFirst] Span: openBox (SentrySpanStatusV2.ok) trace=641eea67e5684fe5bf97bbb58ccb9412 span=ff30deb84aa64feb
+03-10 11:25:09.470  7553  7553 I flutter : [SentrySpanFirst] Span: openLazyBox (SentrySpanStatusV2.ok) trace=641eea67e5684fe5bf97bbb58ccb9412 span=e1159c2728974ccc
+03-10 11:25:09.480  7553  7553 I flutter : [SentrySpanFirst] Span: openBox (SentrySpanStatusV2.ok) trace=641eea67e5684fe5bf97bbb58ccb9412 span=dcb824877b974729
+03-10 11:25:09.493  7553  7553 I flutter : [SentrySpanFirst] Span: openBox (SentrySpanStatusV2.ok) trace=641eea67e5684fe5bf97bbb58ccb9412 span=90462eb654a34c30
+03-10 11:25:09.505  7553  7553 I flutter : [SentrySpanFirst] Span: openBox (SentrySpanStatusV2.ok) trace=641eea67e5684fe5bf97bbb58ccb9412 span=f7d4c304443843fc
+03-10 11:25:09.518  7553  7553 I flutter : [SentrySpanFirst] Span: openBox (SentrySpanStatusV2.ok) trace=641eea67e5684fe5bf97bbb58ccb9412 span=7340a7a7ebe1485e
+03-10 11:25:09.526  7553  7553 I flutter : [SentrySpanFirst] Span: openBox (SentrySpanStatusV2.ok) trace=641eea67e5684fe5bf97bbb58ccb9412 span=3ef1f6e396604adb
+03-10 11:25:14.071  7553  7553 I flutter : [SentrySpanFirst] Span: root / (SentrySpanStatusV2.ok) trace=641eea67e5684fe5bf97bbb58ccb9412 span=ff2db075bd644b67
+03-10 11:25:14.957  7553  7553 I flutter : [SentrySpanFirst] Span: root / initial display (SentrySpanStatusV2.ok) trace=641eea67e5684fe5bf97bbb58ccb9412 span=778c3c595f414ac8
+03-10 11:25:14.957  7553  7553 I flutter : [SentrySpanFirst] Span: Process Initialization (SentrySpanStatusV2.ok) trace=641eea67e5684fe5bf97bbb58ccb9412 span=1301a5b370c6405a
+03-10 11:25:14.957  7553  7553 I flutter : [SentrySpanFirst] Span: App start to plugin registration (SentrySpanStatusV2.ok) trace=641eea67e5684fe5bf97bbb58ccb9412 span=7165a148e2e54014
+03-10 11:25:14.957  7553  7553 I flutter : [SentrySpanFirst] Span: Before Sentry Init Setup (SentrySpanStatusV2.ok) trace=641eea67e5684fe5bf97bbb58ccb9412 span=f14f5fc4a73147b2
+03-10 11:25:14.957  7553  7553 I flutter : [SentrySpanFirst] Span: First frame render (SentrySpanStatusV2.ok) trace=641eea67e5684fe5bf97bbb58ccb9412 span=f11acb015dad4a63
+03-10 11:25:14.957  7553  7553 I flutter : [SentrySpanFirst] Span: Cold Start (SentrySpanStatusV2.ok) trace=641eea67e5684fe5bf97bbb58ccb9412 span=f53567dae28d4a70
+03-10 11:25:14.968  7553  7553 I flutter : 2026-03-10T11:25:14.968170	I	      AppNewsProvider:	 News loaded
+03-10 11:25:14.969  7553  7553 I flutter : 2026-03-10T11:25:14.968970	I	      AppNewsProvider:	 News loaded
+03-10 11:25:16.200  7553  7553 I flutter : unhandled element <sodipodi:namedview/>; Picture key: Svg loader
+03-10 11:25:16.503  7553  7553 I flutter : 2026-03-10T11:25:16.503715	D	PermissionListener:	 New permission value: DevicePermission{permission: Permission.camera, status: DevicePermissionStatus.granted}
+03-10 11:26:20.697  8054  8054 I flutter : [IMPORTANT:flutter/shell/common/shell.cc(528)] [Action Required]: Impeller opt-out deprecated.
+03-10 11:26:20.697  8054  8054 I flutter :     The application opted out of Impeller by either using the
+03-10 11:26:20.697  8054  8054 I flutter :     `--no-enable-impeller` flag or the
+03-10 11:26:20.697  8054  8054 I flutter :     `io.flutter.embedding.android.EnableImpeller` `AndroidManifest.xml` entry.
+03-10 11:26:20.697  8054  8054 I flutter :     These options are going to go away in an upcoming Flutter release. Remove
+03-10 11:26:20.697  8054  8054 I flutter :     the explicit opt-out. If you need to opt-out, please report a bug describing
+03-10 11:26:20.697  8054  8054 I flutter :     the issue.
+03-10 11:26:20.697  8054  8054 I flutter : 
+03-10 11:26:20.697  8054  8054 I flutter :     https://github.com/flutter/flutter/issues/new?template=02_bug.yml
+03-10 11:26:20.697  8054  8054 I flutter : 
+03-10 11:26:20.830  8054  8095 I flutter : The Dart VM service is listening on http://127.0.0.1:37565/KxxQwjIaGQo=/
+03-10 11:26:22.664  8054  8054 I flutter : 2026-03-10T11:26:22.662250	I	      SmoothService:	 New app session started
+03-10 11:26:23.067  8054  8054 I flutter : [SentrySpanFirst] Span: openLazyBox (SentrySpanStatusV2.ok) trace=9a134780df074d9da5489d0b9bbec464 span=32dc2addb59740c3
+03-10 11:26:23.113  8054  8054 I flutter : [SentrySpanFirst] Span: openLazyBox (SentrySpanStatusV2.ok) trace=9a134780df074d9da5489d0b9bbec464 span=930eacb895fc4587
+03-10 11:26:23.131  8054  8054 I flutter : [SentrySpanFirst] Span: openBox (SentrySpanStatusV2.ok) trace=9a134780df074d9da5489d0b9bbec464 span=596d8770d3b94a4b
+03-10 11:26:23.139  8054  8054 I flutter : [SentrySpanFirst] Span: openLazyBox (SentrySpanStatusV2.ok) trace=9a134780df074d9da5489d0b9bbec464 span=7d6dd95342024409
+03-10 11:26:23.148  8054  8054 I flutter : [SentrySpanFirst] Span: openBox (SentrySpanStatusV2.ok) trace=9a134780df074d9da5489d0b9bbec464 span=d5e364e198474241
+03-10 11:26:23.160  8054  8054 I flutter : [SentrySpanFirst] Span: openBox (SentrySpanStatusV2.ok) trace=9a134780df074d9da5489d0b9bbec464 span=03647282aeb24350
+03-10 11:26:23.170  8054  8054 I flutter : [SentrySpanFirst] Span: openBox (SentrySpanStatusV2.ok) trace=9a134780df074d9da5489d0b9bbec464 span=3b6461fbf236441b
+03-10 11:26:23.181  8054  8054 I flutter : [SentrySpanFirst] Span: openBox (SentrySpanStatusV2.ok) trace=9a134780df074d9da5489d0b9bbec464 span=962ac8acd7634468
+03-10 11:26:23.189  8054  8054 I flutter : [SentrySpanFirst] Span: openBox (SentrySpanStatusV2.ok) trace=9a134780df074d9da5489d0b9bbec464 span=d1174040236e4fe8
+03-10 11:26:27.490  8054  8054 I flutter : [SentrySpanFirst] Span: root / (SentrySpanStatusV2.ok) trace=9a134780df074d9da5489d0b9bbec464 span=36425e0795844f88
+03-10 11:26:28.392  8054  8054 I flutter : [SentrySpanFirst] Span: root / initial display (SentrySpanStatusV2.ok) trace=9a134780df074d9da5489d0b9bbec464 span=1f2c25c08b814843
+03-10 11:26:28.392  8054  8054 I flutter : [SentrySpanFirst] Span: Process Initialization (SentrySpanStatusV2.ok) trace=9a134780df074d9da5489d0b9bbec464 span=8201ff5ac16a4868
+03-10 11:26:28.392  8054  8054 I flutter : [SentrySpanFirst] Span: App start to plugin registration (SentrySpanStatusV2.ok) trace=9a134780df074d9da5489d0b9bbec464 span=74b691dbeec34a23
+03-10 11:26:28.393  8054  8054 I flutter : [SentrySpanFirst] Span: Before Sentry Init Setup (SentrySpanStatusV2.ok) trace=9a134780df074d9da5489d0b9bbec464 span=047d08d5d72a44df
+03-10 11:26:28.393  8054  8054 I flutter : [SentrySpanFirst] Span: First frame render (SentrySpanStatusV2.ok) trace=9a134780df074d9da5489d0b9bbec464 span=7bc21178fc014f78
+03-10 11:26:28.393  8054  8054 I flutter : [SentrySpanFirst] Span: Cold Start (SentrySpanStatusV2.ok) trace=9a134780df074d9da5489d0b9bbec464 span=aec7bd1a4fcc4172
+03-10 11:26:28.427  8054  8054 I flutter : 2026-03-10T11:26:28.427779	I	      AppNewsProvider:	 News loaded
+03-10 11:26:28.428  8054  8054 I flutter : 2026-03-10T11:26:28.428647	I	      AppNewsProvider:	 News loaded
+03-10 11:26:29.895  8054  8054 I flutter : unhandled element <sodipodi:namedview/>; Picture key: Svg loader
+03-10 11:26:29.974  8054  8054 I flutter : 2026-03-10T11:26:29.973964	D	PermissionListener:	 New permission value: DevicePermission{permission: Permission.camera, status: DevicePermissionStatus.granted}
+03-10 11:26:31.550  8054  8054 I flutter : [SentrySpanFirst] Span: _product_loader/:productId initial display (SentrySpanStatusV2.ok) trace=49d36d871bf341a2b90ddd4447dcf5e7 span=8251433d7cba4e71
+03-10 11:26:32.776  8054  8054 I flutter : [SentrySpanFirst] Span: GET https://world.openfoodfacts.org/api/v3/product/3017620422003/ (SentrySpanStatusV2.ok) trace=49d36d871bf341a2b90ddd4447dcf5e7 span=faa1b7e07f2c45a8
+03-10 11:26:33.150  8054  8054 I flutter : [SentrySpanFirst] Span: product.load (SentrySpanStatusV2.ok) trace=49d36d871bf341a2b90ddd4447dcf5e7 span=b95e314e32a140b7
+03-10 11:26:33.347  8054  8054 I flutter : 2026-03-10T11:26:33.346958	E	      KnowledgePanelsBuilder:	 Unexpected empty panel data for product "3017620422003" and panelId "prices_card"
+03-10 11:26:33.349  8054  8054 I flutter : 2026-03-10T11:26:33.349646	E	      KnowledgePanelsBuilder:	 Unexpected empty panel data for product "3017620422003" and panelId "folksonomy_card"
+03-10 11:26:34.394  8054  8054 I flutter : 2026-03-10T11:26:34.394378	E	      KnowledgePanelsBuilder:	 Unexpected empty panel data for product "3017620422003" and panelId "prices_card"
+03-10 11:26:34.395  8054  8054 I flutter : 2026-03-10T11:26:34.395369	E	      KnowledgePanelsBuilder:	 Unexpected empty panel data for product "3017620422003" and panelId "folksonomy_card"
+03-10 11:26:35.322  8054  8054 I flutter : [SentrySpanFirst] Span: GET https://api.folksonomy.openfoodfacts.org/product/3017620422003 (SentrySpanStatusV2.ok) trace=49d36d871bf341a2b90ddd4447dcf5e7 span=5efcf40d9ee24324
+03-10 11:26:35.339  8054  8054 I flutter : [SentrySpanFirst] Span: GET https://api.folksonomy.openfoodfacts.org/product/3017620422003 (SentrySpanStatusV2.ok) trace=49d36d871bf341a2b90ddd4447dcf5e7 span=3fcf063377d84224
+03-10 11:26:35.359  8054  8054 I flutter : [SentrySpanFirst] Span: GET https://api.folksonomy.openfoodfacts.org/product/3017620422003 (SentrySpanStatusV2.ok) trace=49d36d871bf341a2b90ddd4447dcf5e7 span=9942cbccd2a042ff
+03-10 11:26:35.392  8054  8054 I flutter : [SentrySpanFirst] Span: GET https://prices.openfoodfacts.org/api/v1/prices (SentrySpanStatusV2.ok) trace=49d36d871bf341a2b90ddd4447dcf5e7 span=d94de122ed1d4b5d
+03-10 11:26:35.438  8054  8054 I flutter : 2026-03-10T11:26:35.438881	E	      KnowledgePanelsBuilder:	 Unexpected empty panel data for product "3017620422003" and panelId "prices_card"
+03-10 11:26:35.439  8054  8054 I flutter : 2026-03-10T11:26:35.439825	E	      KnowledgePanelsBuilder:	 Unexpected empty panel data for product "3017620422003" and panelId "folksonomy_card"
+03-10 11:26:35.738  8054  8054 I flutter : [SentrySpanFirst] Span: GET https://prices.openfoodfacts.org/api/v1/prices (SentrySpanStatusV2.ok) trace=49d36d871bf341a2b90ddd4447dcf5e7 span=6856467e16cd42ea
+03-10 11:26:35.744  8054  8054 I flutter : [SentrySpanFirst] Span: GET https://robotoff.openfoodfacts.org/api/v1/questions/3017620422003 (SentrySpanStatusV2.ok) trace=49d36d871bf341a2b90ddd4447dcf5e7 span=acd6f4f412814322
+03-10 11:26:35.909  8054  8054 I flutter : [SentrySpanFirst] Span: GET https://api.folksonomy.openfoodfacts.org/product/3017620422003 (SentrySpanStatusV2.ok) trace=49d36d871bf341a2b90ddd4447dcf5e7 span=af41305c13244c0d
+03-10 11:26:36.521  8054  8054 I flutter : [SentrySpanFirst] Span: GET https://prices.openfoodfacts.org/api/v1/prices (SentrySpanStatusV2.ok) trace=49d36d871bf341a2b90ddd4447dcf5e7 span=0a34db558e04433c
+03-10 11:26:39.522  8054  8054 I flutter : [SentrySpanFirst] Span: _product_loader/:productId (SentrySpanStatusV2.ok) trace=49d36d871bf341a2b90ddd4447dcf5e7 span=028f06bef8124dcf

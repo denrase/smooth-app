@@ -1,0 +1,385 @@
+[ {
+  "command" : {
+    "launchAppCommand" : {
+      "appId" : "org.openfoodfacts.scanner",
+      "optional" : false
+    }
+  },
+  "metadata" : {
+    "status" : "COMPLETED",
+    "timestamp" : 1773141719393,
+    "duration" : 6005,
+    "sequenceNumber" : 2,
+    "evaluatedCommand" : {
+      "launchAppCommand" : {
+        "appId" : "org.openfoodfacts.scanner",
+        "optional" : false
+      }
+    }
+  }
+}, {
+  "command" : {
+    "applyConfigurationCommand" : {
+      "config" : {
+        "appId" : "org.openfoodfacts.scanner"
+      },
+      "optional" : false
+    }
+  },
+  "metadata" : {
+    "status" : "COMPLETED",
+    "timestamp" : 1773141719391,
+    "duration" : 2,
+    "sequenceNumber" : 1,
+    "evaluatedCommand" : {
+      "applyConfigurationCommand" : {
+        "config" : {
+          "appId" : "org.openfoodfacts.scanner"
+        },
+        "optional" : false
+      }
+    }
+  }
+}, {
+  "command" : {
+    "waitForAnimationToEndCommand" : {
+      "optional" : false
+    }
+  },
+  "metadata" : {
+    "status" : "COMPLETED",
+    "timestamp" : 1773141752068,
+    "duration" : 12806,
+    "sequenceNumber" : 11,
+    "evaluatedCommand" : {
+      "waitForAnimationToEndCommand" : {
+        "optional" : false
+      }
+    }
+  }
+}, {
+  "command" : {
+    "takeScreenshotCommand" : {
+      "path" : "02_03_search_submitted",
+      "optional" : false
+    }
+  },
+  "metadata" : {
+    "status" : "COMPLETED",
+    "timestamp" : 1773141771372,
+    "duration" : 380,
+    "sequenceNumber" : 15,
+    "evaluatedCommand" : {
+      "takeScreenshotCommand" : {
+        "path" : "02_03_search_submitted",
+        "optional" : false
+      }
+    }
+  }
+}, {
+  "command" : {
+    "waitForAnimationToEndCommand" : {
+      "optional" : false
+    }
+  },
+  "metadata" : {
+    "status" : "COMPLETED",
+    "timestamp" : 1773141746576,
+    "duration" : 2354,
+    "sequenceNumber" : 9,
+    "evaluatedCommand" : {
+      "waitForAnimationToEndCommand" : {
+        "optional" : false
+      }
+    }
+  }
+}, {
+  "command" : {
+    "runScriptCommand" : {
+      "script" : "// Busy-wait for 45 seconds to allow search results to load.\n// Maestro 2.2.0 removed the built-in sleep() function from evalScript.\nvar end = Date.now() + 45000;\nwhile (Date.now() < end) {}\noutput.result = \"waited 45s\";\n",
+      "sourceDescription" : "/Users/denis/Repos/repros/smooth-app/maestro/scripts/wait_45s.js",
+      "optional" : false
+    }
+  },
+  "metadata" : {
+    "status" : "COMPLETED",
+    "timestamp" : 1773141771752,
+    "duration" : 45520,
+    "sequenceNumber" : 16,
+    "evaluatedCommand" : {
+      "runScriptCommand" : {
+        "script" : "// Busy-wait for 45 seconds to allow search results to load.\n// Maestro 2.2.0 removed the built-in sleep() function from evalScript.\nvar end = Date.now() + 45000;\nwhile (Date.now() < end) {}\noutput.result = \"waited 45s\";\n",
+        "sourceDescription" : "/Users/denis/Repos/repros/smooth-app/maestro/scripts/wait_45s.js",
+        "optional" : false
+      }
+    }
+  }
+}, {
+  "command" : {
+    "pressKeyCommand" : {
+      "code" : "ENTER",
+      "optional" : false
+    }
+  },
+  "metadata" : {
+    "status" : "COMPLETED",
+    "timestamp" : 1773141765331,
+    "duration" : 1857,
+    "sequenceNumber" : 13,
+    "evaluatedCommand" : {
+      "pressKeyCommand" : {
+        "code" : "ENTER",
+        "optional" : false
+      }
+    }
+  }
+}, {
+  "command" : {
+    "waitForAnimationToEndCommand" : {
+      "optional" : false
+    }
+  },
+  "metadata" : {
+    "status" : "COMPLETED",
+    "timestamp" : 1773141767189,
+    "duration" : 4183,
+    "sequenceNumber" : 14,
+    "evaluatedCommand" : {
+      "waitForAnimationToEndCommand" : {
+        "optional" : false
+      }
+    }
+  }
+}, {
+  "command" : {
+    "inputTextCommand" : {
+      "text" : "nutella",
+      "optional" : false
+    }
+  },
+  "metadata" : {
+    "status" : "COMPLETED",
+    "timestamp" : 1773141748930,
+    "duration" : 3137,
+    "sequenceNumber" : 10,
+    "evaluatedCommand" : {
+      "inputTextCommand" : {
+        "text" : "nutella",
+        "optional" : false
+      }
+    }
+  }
+}, {
+  "command" : {
+    "tapOnElement" : {
+      "selector" : {
+        "textRegex" : "Search",
+        "optional" : false
+      },
+      "retryIfNoChange" : false,
+      "waitUntilVisible" : false,
+      "longPress" : false,
+      "optional" : false
+    }
+  },
+  "metadata" : {
+    "status" : "COMPLETED",
+    "timestamp" : 1773141741340,
+    "duration" : 5236,
+    "sequenceNumber" : 8,
+    "evaluatedCommand" : {
+      "tapOnElement" : {
+        "selector" : {
+          "textRegex" : "Search",
+          "optional" : false
+        },
+        "retryIfNoChange" : false,
+        "waitUntilVisible" : false,
+        "longPress" : false,
+        "optional" : false
+      }
+    }
+  }
+}, {
+  "command" : {
+    "tapOnElement" : {
+      "selector" : {
+        "textRegex" : "maestro_search_bar",
+        "optional" : false
+      },
+      "retryIfNoChange" : false,
+      "waitUntilVisible" : false,
+      "longPress" : false,
+      "optional" : false
+    }
+  },
+  "metadata" : {
+    "status" : "COMPLETED",
+    "timestamp" : 1773141736090,
+    "duration" : 4261,
+    "sequenceNumber" : 6,
+    "evaluatedCommand" : {
+      "tapOnElement" : {
+        "selector" : {
+          "textRegex" : "maestro_search_bar",
+          "optional" : false
+        },
+        "retryIfNoChange" : false,
+        "waitUntilVisible" : false,
+        "longPress" : false,
+        "optional" : false
+      }
+    }
+  }
+}, {
+  "command" : {
+    "takeScreenshotCommand" : {
+      "path" : "02_01_home",
+      "optional" : false
+    }
+  },
+  "metadata" : {
+    "status" : "COMPLETED",
+    "timestamp" : 1773141735619,
+    "duration" : 471,
+    "sequenceNumber" : 5,
+    "evaluatedCommand" : {
+      "takeScreenshotCommand" : {
+        "path" : "02_01_home",
+        "optional" : false
+      }
+    }
+  }
+}, {
+  "command" : {
+    "assertConditionCommand" : {
+      "condition" : {
+        "visible" : {
+          "textRegex" : "maestro_search_bar",
+          "optional" : false
+        }
+      },
+      "timeout" : "45000",
+      "optional" : false
+    }
+  },
+  "metadata" : {
+    "status" : "COMPLETED",
+    "timestamp" : 1773141728228,
+    "duration" : 7391,
+    "sequenceNumber" : 4,
+    "evaluatedCommand" : {
+      "assertConditionCommand" : {
+        "condition" : {
+          "visible" : {
+            "textRegex" : "maestro_search_bar",
+            "optional" : false
+          }
+        },
+        "timeout" : "45000",
+        "optional" : false
+      }
+    }
+  }
+}, {
+  "command" : {
+    "defineVariablesCommand" : {
+      "env" : {
+        "MAESTRO_FILENAME" : "02_search_product",
+        "MAESTRO_DEVICE_UDID" : "0B041JEC215691",
+        "MAESTRO_SHARD_ID" : "1",
+        "MAESTRO_SHARD_INDEX" : "0"
+      },
+      "optional" : false
+    }
+  },
+  "metadata" : {
+    "status" : "COMPLETED",
+    "timestamp" : 1773141719387,
+    "duration" : 4,
+    "sequenceNumber" : 0,
+    "evaluatedCommand" : {
+      "defineVariablesCommand" : {
+        "env" : {
+          "MAESTRO_FILENAME" : "02_search_product",
+          "MAESTRO_DEVICE_UDID" : "0B041JEC215691",
+          "MAESTRO_SHARD_ID" : "1",
+          "MAESTRO_SHARD_INDEX" : "0"
+        },
+        "optional" : false
+      }
+    }
+  }
+}, {
+  "command" : {
+    "takeScreenshotCommand" : {
+      "path" : "02_04_search_results",
+      "optional" : false
+    }
+  },
+  "metadata" : {
+    "status" : "COMPLETED",
+    "timestamp" : 1773141817272,
+    "duration" : 538,
+    "sequenceNumber" : 17,
+    "evaluatedCommand" : {
+      "takeScreenshotCommand" : {
+        "path" : "02_04_search_results",
+        "optional" : false
+      }
+    }
+  }
+}, {
+  "command" : {
+    "waitForAnimationToEndCommand" : {
+      "optional" : false
+    }
+  },
+  "metadata" : {
+    "status" : "COMPLETED",
+    "timestamp" : 1773141740351,
+    "duration" : 989,
+    "sequenceNumber" : 7,
+    "evaluatedCommand" : {
+      "waitForAnimationToEndCommand" : {
+        "optional" : false
+      }
+    }
+  }
+}, {
+  "command" : {
+    "waitForAnimationToEndCommand" : {
+      "optional" : false
+    }
+  },
+  "metadata" : {
+    "status" : "COMPLETED",
+    "timestamp" : 1773141725399,
+    "duration" : 2829,
+    "sequenceNumber" : 3,
+    "evaluatedCommand" : {
+      "waitForAnimationToEndCommand" : {
+        "optional" : false
+      }
+    }
+  }
+}, {
+  "command" : {
+    "takeScreenshotCommand" : {
+      "path" : "02_02_typed_query",
+      "optional" : false
+    }
+  },
+  "metadata" : {
+    "status" : "COMPLETED",
+    "timestamp" : 1773141764874,
+    "duration" : 457,
+    "sequenceNumber" : 12,
+    "evaluatedCommand" : {
+      "takeScreenshotCommand" : {
+        "path" : "02_02_typed_query",
+        "optional" : false
+      }
+    }
+  }
+} ]

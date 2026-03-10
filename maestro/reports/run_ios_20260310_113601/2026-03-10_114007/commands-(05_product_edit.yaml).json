@@ -1,0 +1,219 @@
+[ {
+  "command" : {
+    "assertConditionCommand" : {
+      "condition" : {
+        "visible" : {
+          "textRegex" : "maestro_search_bar",
+          "optional" : false
+        }
+      },
+      "timeout" : "45000",
+      "optional" : false
+    }
+  },
+  "metadata" : {
+    "status" : "COMPLETED",
+    "timestamp" : 1773139215194,
+    "duration" : 1633,
+    "sequenceNumber" : 4,
+    "evaluatedCommand" : {
+      "assertConditionCommand" : {
+        "condition" : {
+          "visible" : {
+            "textRegex" : "maestro_search_bar",
+            "optional" : false
+          }
+        },
+        "timeout" : "45000",
+        "optional" : false
+      }
+    }
+  }
+}, {
+  "command" : {
+    "launchAppCommand" : {
+      "appId" : "org.openfoodfacts.scanner",
+      "optional" : false
+    }
+  },
+  "metadata" : {
+    "status" : "COMPLETED",
+    "timestamp" : 1773139211824,
+    "duration" : 1724,
+    "sequenceNumber" : 2,
+    "evaluatedCommand" : {
+      "launchAppCommand" : {
+        "appId" : "org.openfoodfacts.scanner",
+        "optional" : false
+      }
+    }
+  }
+}, {
+  "command" : {
+    "openLinkCommand" : {
+      "link" : "https://world.openfoodfacts.org/product/3017620422003",
+      "autoVerify" : false,
+      "browser" : false,
+      "optional" : false
+    }
+  },
+  "metadata" : {
+    "status" : "COMPLETED",
+    "timestamp" : 1773139216897,
+    "duration" : 385,
+    "sequenceNumber" : 6,
+    "evaluatedCommand" : {
+      "openLinkCommand" : {
+        "link" : "https://world.openfoodfacts.org/product/3017620422003",
+        "autoVerify" : false,
+        "browser" : false,
+        "optional" : false
+      }
+    }
+  }
+}, {
+  "command" : {
+    "defineVariablesCommand" : {
+      "env" : {
+        "MAESTRO_FILENAME" : "05_product_edit",
+        "MAESTRO_DEVICE_UDID" : "3757548B-0503-4B4F-B589-1D8A9C2D0813",
+        "MAESTRO_SHARD_ID" : "1",
+        "MAESTRO_SHARD_INDEX" : "0"
+      },
+      "optional" : false
+    }
+  },
+  "metadata" : {
+    "status" : "COMPLETED",
+    "timestamp" : 1773139211817,
+    "duration" : 4,
+    "sequenceNumber" : 0,
+    "evaluatedCommand" : {
+      "defineVariablesCommand" : {
+        "env" : {
+          "MAESTRO_FILENAME" : "05_product_edit",
+          "MAESTRO_DEVICE_UDID" : "3757548B-0503-4B4F-B589-1D8A9C2D0813",
+          "MAESTRO_SHARD_ID" : "1",
+          "MAESTRO_SHARD_INDEX" : "0"
+        },
+        "optional" : false
+      }
+    }
+  }
+}, {
+  "command" : {
+    "waitForAnimationToEndCommand" : {
+      "optional" : false
+    }
+  },
+  "metadata" : {
+    "status" : "COMPLETED",
+    "timestamp" : 1773139217282,
+    "duration" : 2674,
+    "sequenceNumber" : 7,
+    "evaluatedCommand" : {
+      "waitForAnimationToEndCommand" : {
+        "optional" : false
+      }
+    }
+  }
+}, {
+  "command" : {
+    "takeScreenshotCommand" : {
+      "path" : "05_01_home",
+      "optional" : false
+    }
+  },
+  "metadata" : {
+    "status" : "COMPLETED",
+    "timestamp" : 1773139216827,
+    "duration" : 70,
+    "sequenceNumber" : 5,
+    "evaluatedCommand" : {
+      "takeScreenshotCommand" : {
+        "path" : "05_01_home",
+        "optional" : false
+      }
+    }
+  }
+}, {
+  "command" : {
+    "runScriptCommand" : {
+      "script" : "// Busy-wait for 15 seconds to allow deep link product page to load.\n// Maestro 2.2.0 removed the built-in sleep() function from evalScript.\nvar end = Date.now() + 15000;\nwhile (Date.now() < end) {}\noutput.result = \"waited 15s\";\n",
+      "sourceDescription" : "/Users/denis/Repos/repros/smooth-app/maestro/scripts/wait_15s.js",
+      "optional" : false
+    }
+  },
+  "metadata" : {
+    "status" : "COMPLETED",
+    "timestamp" : 1773139219956,
+    "duration" : 15516,
+    "sequenceNumber" : 8,
+    "evaluatedCommand" : {
+      "runScriptCommand" : {
+        "script" : "// Busy-wait for 15 seconds to allow deep link product page to load.\n// Maestro 2.2.0 removed the built-in sleep() function from evalScript.\nvar end = Date.now() + 15000;\nwhile (Date.now() < end) {}\noutput.result = \"waited 15s\";\n",
+        "sourceDescription" : "/Users/denis/Repos/repros/smooth-app/maestro/scripts/wait_15s.js",
+        "optional" : false
+      }
+    }
+  }
+}, {
+  "command" : {
+    "applyConfigurationCommand" : {
+      "config" : {
+        "appId" : "org.openfoodfacts.scanner"
+      },
+      "optional" : false
+    }
+  },
+  "metadata" : {
+    "status" : "COMPLETED",
+    "timestamp" : 1773139211822,
+    "duration" : 2,
+    "sequenceNumber" : 1,
+    "evaluatedCommand" : {
+      "applyConfigurationCommand" : {
+        "config" : {
+          "appId" : "org.openfoodfacts.scanner"
+        },
+        "optional" : false
+      }
+    }
+  }
+}, {
+  "command" : {
+    "takeScreenshotCommand" : {
+      "path" : "05_02_deep_link_opened",
+      "optional" : false
+    }
+  },
+  "metadata" : {
+    "status" : "COMPLETED",
+    "timestamp" : 1773139235473,
+    "duration" : 86,
+    "sequenceNumber" : 9,
+    "evaluatedCommand" : {
+      "takeScreenshotCommand" : {
+        "path" : "05_02_deep_link_opened",
+        "optional" : false
+      }
+    }
+  }
+}, {
+  "command" : {
+    "waitForAnimationToEndCommand" : {
+      "optional" : false
+    }
+  },
+  "metadata" : {
+    "status" : "COMPLETED",
+    "timestamp" : 1773139213548,
+    "duration" : 1646,
+    "sequenceNumber" : 3,
+    "evaluatedCommand" : {
+      "waitForAnimationToEndCommand" : {
+        "optional" : false
+      }
+    }
+  }
+} ]

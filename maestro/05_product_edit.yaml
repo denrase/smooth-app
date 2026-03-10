@@ -16,5 +16,6 @@ appId: org.openfoodfacts.scanner
 # Open product via deep link (HTTP fetch takes a few seconds in debug mode)
 - openLink: "https://world.openfoodfacts.org/product/3017620422003"
 - waitForAnimationToEnd
-- evalScript: ${sleep(15000)}
+- runScript:
+    file: scripts/wait_15s.js
 - takeScreenshot: 05_02_deep_link_opened

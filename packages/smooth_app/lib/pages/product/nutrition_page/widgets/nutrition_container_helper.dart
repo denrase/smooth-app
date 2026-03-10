@@ -175,11 +175,14 @@ class NutritionContainerHelper extends ChangeNotifier {
     for (final MapEntry<Nutrient, double?> entry in _values.entries) {
       final Nutrient nutrient = entry.key;
       final double? value = entry.value;
-      nutriments.setValue(
-        nutrient,
-        _perSize,
-        convertWeightToG(value, getUnit(nutrient)),
-      );
+      final double? valueInG = convertWeightToG(value, getUnit(nutrient));
+      if (valueInG != null) {
+        nutriments.setValue(
+          nutrient,
+          valueInG,
+          unit: Unit.G,
+        );
+      }
     }
     return nutriments;
   }
@@ -344,7 +347,7 @@ class NutritionContainerHelper extends ChangeNotifier {
       final double? value = convertWeightFromG(
         nutrient == Nutrient.energyKJ
             ? nutriments.getComputedKJ(_perSize)?.roundToDouble()
-            : nutriments.getValue(nutrient, _perSize),
+            : nutriments.getComputedValue(nutrient, _perSize),
         unit,
       );
       if (value != null) {

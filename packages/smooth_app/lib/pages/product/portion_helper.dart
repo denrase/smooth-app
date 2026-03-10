@@ -68,7 +68,7 @@ class PortionHelper {
     final Nutrient nutrient,
     final String nutrientName,
   ) {
-    double? value = productNutriments.getValue(
+    double? value = productNutriments.getComputedValue(
       nutrient,
       PerSize.oneHundredGrams,
     );

@@ -81,3 +81,47 @@ focus to the history list overlay, or the XCTest driver's `inputText` /
 `pressKey` may not route to the correct first-responder. The iOS keyboard still
 shows the search action button but Maestro's enter key event doesn't reach the
 Flutter engine's `onSubmitted` callback.
+
+---
+
+## `evalScript: ${sleep()}` removed in Maestro 2.2.0 — RESOLVED
+
+### Problem
+
+Maestro 2.2.0 removed the `sleep()` JavaScript function from `evalScript`.
+Flows using `evalScript: ${sleep(45000)}` fail with:
+```
+TypeError: undefined is not a function
+```
+
+### Fix
+
+Replaced with `runScript` using a JS file containing a `Date.now()` busy-wait loop:
+```yaml
+- runScript:
+    file: scripts/wait_45s.js
+```
+
+Wait scripts live in `maestro/scripts/`. While busy-waiting is not ideal, it
+is the only reliable cross-platform delay mechanism in Maestro 2.2.0's GraalJS
+engine (which lacks `setTimeout`, `Thread.sleep()`, and the old `sleep()` builtin).
+
+---
+
+## Android: Maestro driver APK installation over USB
+
+### Problem
+
+Maestro 2.2.0's `dadb` library fails to install driver APKs (`maestro-server.apk`,
+`maestro-app.apk`) on USB-connected physical Android devices. The TCP/IP
+workaround (`adb tcpip 5555`) requires Mac and device on the same reachable network.
+
+### Workaround
+
+Extract and manually install the driver APKs from the Maestro JAR:
+```bash
+cd /tmp && jar xf ~/.maestro/lib/maestro-client.jar maestro-server.apk maestro-app.apk
+adb install maestro-server.apk
+adb install maestro-app.apk
+maestro test --no-reinstall-driver --device <USB_DEVICE_ID> flow.yaml
+```

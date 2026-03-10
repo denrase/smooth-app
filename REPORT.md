@@ -26,7 +26,7 @@ Key files:
 
 ### Automation
 
-5 [Maestro flows](https://github.com/denrase/smooth-app/tree/sentry/smooth-app-span-first/maestro) + a dedicated [validation entrypoint](https://github.com/denrase/smooth-app/blob/sentry/smooth-app-span-first/packages/smooth_app/lib/entrypoints/ios/main_ios_scan_validation.dart) for scan/background task paths. All 5 flows passed on both platforms.
+5 [Maestro flows](https://github.com/denrase/smooth-app/tree/sentry/smooth-app-span-first/maestro) + a dedicated [validation entrypoint](https://github.com/denrase/smooth-app/blob/sentry/smooth-app-span-first/packages/smooth_app/lib/entrypoints/ios/main_ios_scan_validation.dart) for scan/background task paths. All 5 flows passed on both platforms. Search results confirmed via screenshots (141 products for "nutella").
 
 | Flow | What it exercises |
 |------|-------------------|
@@ -44,7 +44,7 @@ These map to the [assertions from the issue](https://github.com/getsentry/sentry
 
 | # | Assertion | Result | Evidence |
 |---|-----------|--------|----------|
-| 1 | `ignoreSpans` and `beforeSendSpan` behave correctly | ✅ | `beforeSendSpan` fired for all spans — 108 on iOS, 94 on Android. Configured in [`analytics_helper.dart`](https://github.com/denrase/smooth-app/blob/sentry/smooth-app-span-first/packages/smooth_app/lib/helpers/analytics_helper.dart). |
+| 1 | `ignoreSpans` and `beforeSendSpan` behave correctly | ✅ | `beforeSendSpan` fired for all spans — 127 on iOS, 111 on Android. Configured in [`analytics_helper.dart`](https://github.com/denrase/smooth-app/blob/sentry/smooth-app-span-first/packages/smooth_app/lib/helpers/analytics_helper.dart). |
 | 2 | No spans unexpectedly dropped by ingest | ✅ | All spans confirmed in Sentry — dashboard match on iOS, API query (`dataset=spans`) on Android. |
 | 3 | Span hierarchies correct | ✅ | Parent-child nesting verified in trace view on both platforms. One expected exception: `product.fetch` orphaned due to fire-and-forget pattern — see [API findings](#startspan-callback-doesnt-work-with-fire-and-forget). |
 | 4 | `configureScope` delegates attributes to children | ✅ | `span.setAttribute()` works correctly inside `startSpan` callbacks. Note: `scope.setTag()` is **not** part of the span-first API — only `setAttribute` is supported. |
@@ -61,12 +61,12 @@ All auto-instrumented and manual span types verified on both platforms. Numbers 
 |-----------|-----|---------|-------|
 | **App Start** | ✅ 1 Cold + 4 Warm | ✅ 5 Cold | Sub-spans differ per platform (see [iOS](REPORT_IOS.md#ios-specific-observations), [Android](REPORT_ANDROID.md#android-specific-observations)) |
 | **Hive DB** (openBox/openLazyBox) | ✅ 9 per launch | ✅ 9 per launch | |
-| **product.search** | ✅ 20.1s | ✅ 27.6s | |
-| **product.search.decode** | ✅ 84ms | ✅ 689ms | |
-| **product.load** | ✅ 649ms, 636ms | ✅ 1.5s, 2.4s | Via deep link (flows 03, 05) |
+| **product.search** | ✅ | ✅ | |
+| **product.search.decode** | ✅ | ✅ | |
+| **product.load** | ✅ (×2) | ✅ (×2) | Via deep link (flows 03, 05) |
 | **HTTP** | ✅ | ✅ | SVG downloads + API calls |
 | **TTID/TTFD** | ✅ | ✅ | `root /`, `_product_loader/:productId` |
-| **beforeSendSpan** | ✅ all 108 spans | ✅ all 94 spans | |
+| **beforeSendSpan** | ✅ all 127 spans | ✅ all 111 spans | |
 | **product.scan / .cache_lookup / .fetch** | N/A | N/A | Camera-only, not testable via Maestro |
 | **background_task.lifecycle / .execute** | N/A | N/A | Requires OpenFoodFacts login |
 

@@ -228,7 +228,7 @@ class _CompareProducts3PageState extends State<CompareProducts3Page> {
       if (product.nutriments == null) {
         return null;
       }
-      final double? value = product.nutriments!.getValue(
+      final double? value = product.nutriments!.getComputedValue(
         nutrient,
         PerSize.oneHundredGrams,
       );
